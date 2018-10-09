@@ -183,7 +183,7 @@ redirect_from:
 
 波兰表达式的求值与逆波兰表达式的求值十分相似，均是使用栈，唯一的区别在于求解波兰表达式时读入顺序是从右向左。
 
-[^1]:[调度场算法 - 维基百科，自由的百科全书]("https://zh.wikipedia.org/wiki/%E8%B0%83%E5%BA%A6%E5%9C%BA%E7%AE%97%E6%B3%95")
-[^2]:[中缀表示法 - 维基百科，自由的百科全书]("https://zh.wikipedia.org/wiki/%E4%B8%AD%E7%BC%80%E8%A1%A8%E7%A4%BA%E6%B3%95")
-[^3]:[波兰表示法 - 维基百科，自由的百科全书]("https://zh.wikipedia.org/wiki/%E6%B3%A2%E5%85%B0%E8%A1%A8%E7%A4%BA%E6%B3%95")
-[^4]:[逆波兰表示法 - 维基百科，自由的百科全书]("https://zh.wikipedia.org/wiki/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E7%A4%BA%E6%B3%95")
+[^1]:[调度场算法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E8%B0%83%E5%BA%A6%E5%9C%BA%E7%AE%97%E6%B3%95)
+[^2]:[中缀表示法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E4%B8%AD%E7%BC%80%E8%A1%A8%E7%A4%BA%E6%B3%95)
+[^3]:[波兰表示法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E6%B3%A2%E5%85%B0%E8%A1%A8%E7%A4%BA%E6%B3%95)
+[^4]:[逆波兰表示法 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E7%A4%BA%E6%B3%95)
