@@ -104,8 +104,10 @@ theme: cactus
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: https://github.com/i1123581321/i1123581321.github.io.git
+  repo: git@github.com:i1123581321/i1123581321.github.io.git
   branch: master
+  message: "Github CI Auto Builder at {{ now('YYYY-MM-DD HH:mm:ss Z') }}"
+
 
 
 mathjax:
