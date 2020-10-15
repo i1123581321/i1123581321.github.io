@@ -1,9 +1,10 @@
 ---
 title: 使用 Hexo 与 GitHub pages 快速搭建博客
 date: 2020-10-14 22:29:42
-tags: 
+tags:
 - hexo
 - github
+categories: ["computer science", "other"]
 mathjax: true
 ---
 
@@ -147,7 +148,7 @@ deploy:
   type: git
   repo: <repo_url>
   branch: master
-  message: 
+  message:
 ```
 
 需要注意此处的 `repo_url` 必须是 ssh 形式，即协议为 git 而非 https
