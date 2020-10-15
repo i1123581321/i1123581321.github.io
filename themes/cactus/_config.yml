@@ -62,7 +62,7 @@ post:
 # Customize the copyright years
 # Note: if start_year/end_year not provided, will use current year.
 copyright:
-  start_year: 2016
+  start_year: 2020
   end_year:
 
 ##############################################################################
@@ -80,7 +80,7 @@ logo:
   enabled: true
   width: 50
   height: 50
-  url: /images/logo.png
+  url: /images/nautilus.png
   gravatar: false
 
 # Customize the favicons.
