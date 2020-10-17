@@ -62,7 +62,7 @@ Equivalence Relations: Reflexive, Symmetric and Transitive
 对于一个等价关系 $R$ ，可定义 Equivalence Class
 
 \begin{equation*}
-[x]_{R} = \\{y \mid x R y\\}
+[x]_{R} = \\{y : x R y\\}
 \end{equation*}
 
 两个等价类之间的关系只有相等或 disjoint
@@ -121,7 +121,7 @@ string 有几种运算，对于 string $w = a_{1}a_{2}\dots a_{n}, v = b_{1}b_{2
 
 Language 是 string 的集合，即 $\Sigma^{*}$ 的子集
 
-e. g. $L = \\{a^{n}b^{n}:n \geqslant 0\\}$ ，这个 Language 不能通过正则描述
+e.g. $L = \\{a^{n}b^{n}:n \geqslant 0\\}$ ，这个 Language 不能通过正则描述
 
 由于 Language 本质是集合，故集合的操作同样适用于 Language（Union，Intersection，Difference，Complement），$\overline{L} = \Sigma^{*} - L$
 
