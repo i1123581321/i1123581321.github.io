@@ -4,6 +4,11 @@ date: 2020-10-22 22:44:59
 tags: "markdown"
 categories: ["computer science", "other"]
 mathjax: true
+documentclass: ctexart
+classoption: UTF8
+geometry:
+- margin=1in
+- a4paper
 ---
 
 用于测试 markdown 能否正确被渲染（hexo 或 pandoc）

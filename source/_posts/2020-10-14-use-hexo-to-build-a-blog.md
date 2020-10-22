@@ -5,7 +5,12 @@ tags:
 - "hexo"
 - "github"
 categories: ["computer science", "other"]
-mathjax: true
+mathjax: false
+documentclass: ctexart
+classoption: UTF8
+geometry:
+- margin=1in
+- a4paper
 ---
 
 搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸

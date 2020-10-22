@@ -4,6 +4,11 @@ date: 2020-10-17 16:07:52
 tags: "theory"
 categories: ["course notes", "theory of computation"]
 mathjax: true
+documentclass: ctexart
+classoption: UTF8
+geometry:
+- margin=1in
+- a4paper
 ---
 
 ## Finite Automata
