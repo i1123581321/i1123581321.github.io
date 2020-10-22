@@ -59,21 +59,21 @@ Induction. $\delta(q, wa) = \delta(\delta(q, w), a)$
 
 Extend transition function 与 transition function 不做区分
 
-\begin{equation*}
+$$
 \hat{\delta}(q, a) = \delta(\hat{\delta}(q, \epsilon), a) = \delta(q, a)
-\end{equation*}
+$$
 
 ### Language of DFA
 
 各种各样的 Automata 都定义语言，对于 DFA $A$ ，其定义的语言的形式化定义如下
 
-\begin{equation*}
-L(A) = \\{w:\delta(q_0, w) \in F\\}
-\end{equation*}
+$$
+L(A) = \{w:\delta(q_0, w) \in F\}
+$$
 
 **Regular language**: a language is regular if it is the language accepted by some DFA
 
-e.g. A Nonregular Language: $L = \\{0^{n}1^{n} : n \geqslant 1 \\}$
+e.g. A Nonregular Language: $L = \{0^{n}1^{n} : n \geqslant 1 \}$
 
 Proof.
 
@@ -81,15 +81,15 @@ Proof.
 
 则必然存在从起始状态到接收状态的路径
 
-\begin{equation*}
+$$
 (q_0,0^m1^m) \to (q_1, 0^{m-1}1^{m}) \to \dots \to (q_m, 1^m) \to \dots \to (q_{2m})
-\end{equation*}
+$$
 
 考虑前 $m$ 次 transition，有 $m+1$ 个 state，根据 PHP，必然有一个状态至少出现两次，假设其为 $q$，则 $q_i = q_j = q, i < j$，路径变为
 
-\begin{equation*}
+$$
 (q_0,0^m1^m) \to (q_1, 0^{m-1}1^{m}) \to \dots \to(q, 0^{m-i}1^m) \to \dots  \to (q, 0^{m-j}1^m)\to \dots \to (q_{2m})
-\end{equation*}
+$$
 
 则该 DFA 同样可接受 $0^{m-j+i}1^{m}$ ，矛盾
 
@@ -111,15 +111,15 @@ An NFA is represented formally by a 5-tuple, $(Q, \Sigma, \delta, q_{0}, F)$ ，
 
 对于 NFA ，$\delta(q, a)$ 的输出是一个状态的集合。其 Extended 的递归定义
 
-Basis. $\delta(q, \epsilon) = \\{q\\}$
+Basis. $\delta(q, \epsilon) = \{q\}$
 
 Induction. $\delta(q, wa) = \bigcup_{p \in \delta(q, w)}\delta(p, a)$
 
 对于 NFA $A$ ，其定义的语言如下
 
-\begin{equation*}
-L(A) = \\{w:\delta(q_0, w) \cap F \neq \varnothing \\}
-\end{equation*}
+$$
+L(A) = \{w:\delta(q_0, w) \cap F \neq \varnothing \}
+$$
 
 即只要存在一条运行路径结束于接收状态即可认为接受该 string
 
@@ -142,9 +142,9 @@ Induction. $\hat{\delta}(q, xa) = \bigcup_{p \in \hat{\delta}(q, x)}CL(\delta(p,
 
 $\epsilon$-NFA $A$ 定义的 language 即为
 
-\begin{equation*}
-L(A) = \\{w:\hat{\delta}(q_0, w) \cap F \neq \varnothing \\}
-\end{equation*}
+$$
+L(A) = \{w:\hat{\delta}(q_0, w) \cap F \neq \varnothing \}
+$$
 
 ## Equivalence of DFA, NFA
 
@@ -152,13 +152,13 @@ L(A) = \\{w:\hat{\delta}(q_0, w) \cap F \neq \varnothing \\}
 
 A DFA can be turned into an NFA that accepts the same language:
 
-If $\delta_{D}(q, a) = p$, let the NFA have $\delta_{N}(q, a) = \\{p\\}$
+If $\delta_{D}(q, a) = p$, let the NFA have $\delta_{N}(q, a) = \{p\}$
 
 #### NFA to DFA: subset construction
 
 从 NFA 构造 DFA 可使用 subset construction
 
-对于 NFA $N = (Q_{N}, \Sigma, \delta_{N}, q_{0}, F_{N})$ ，目标是构造一个 DFA $D = (Q_{D}, \Sigma, \delta_{D}, \\{q_{0}\\}, F_{D})$ 满足 $L(D) = L(N)$
+对于 NFA $N = (Q_{N}, \Sigma, \delta_{N}, q_{0}, F_{N})$ ，目标是构造一个 DFA $D = (Q_{D}, \Sigma, \delta_{D}, \{q_{0}\}, F_{D})$ 满足 $L(D) = L(N)$
 
 $D$ 的开始状态为一个集合，其中唯一的元素是 $N$ 的开始状态，且由于两者接受相同的语言，故 $D$ 与 $N$ 的 alphabet 相同，其余部分的构造如下
 
@@ -166,17 +166,17 @@ $D$ 的开始状态为一个集合，其中唯一的元素是 $N$ 的开始状�
 * $F_{D}$ 是满足 $S \subseteq Q_{N} \land S \cap F_{N} \neq \varnothing$ 的 $S$ 的集合
 * $\delta_{D}$ 的定义如下，对于任意 $S \subseteq Q_{N}, a \in \Sigma$
 
-  \begin{equation*}
+  $$
   \delta_{D}(S, a) = \bigcup_{p \in S}\delta_{N}(p, a)
-  \end{equation*}
+  $$
 
 **Critical Point**: DFA 的状态为 NFA 状态的**集合**
 
 证明其正确性只需证明对字符串 $w$ ，有
 
-\begin{equation*}
-\delta_{N}(q_{0}, w) = \delta_{D}(\\{q_{0}\\}, w)
-\end{equation*}
+$$
+\delta_{N}(q_{0}, w) = \delta_{D}(\{q_{0}\}, w)
+$$
 
 Proof.
 
@@ -184,46 +184,48 @@ Proof.
 
 Basis. $w = \epsilon$
 
-\begin{equation*}
-\delta_{N}(q_{0}, \epsilon) = \delta_{D}(\\{q_{0}\\}, \epsilon) = \\{q_{0}\\}
-\end{equation*}
+$$
+\delta_{N}(q_{0}, \epsilon) = \delta_{D}(\{q_{0}\}, \epsilon) = \{q_{0}\}
+$$
 
 Induction. 令 $w = xa$ ，根据 I. H. 有
 
-\begin{equation*}
-\delta_{N}(q_{0}, x) = \delta_{D}(\\{q_{0}\\}, x) = S
-\end{equation*}
+$$
+\delta_{N}(q_{0}, x) = \delta_{D}(\{q_{0}\}, x) = S
+$$
 
 令 $T = \bigcup_{p \in S}\delta_{N}(p, a)$
 
 根据 NFA transition function 的定义，有
 
-\begin{equation*}
+$$
 \delta_{N}(q_{0}, w) = \delta_{N}(q_{0}, xa) = \bigcup_{p \in \delta_{N}(q_{0}, x)}\delta_{N}(p, a) = T
-\end{equation*}
+$$
 
 而根据上述证明的构造有
 
-\begin{equation*}
+$$
 \delta_{D}(S, a) = \bigcup_{p \in S} \delta_{N}(p, a) = T
-\end{equation*}
+$$
 
 同样的，根据 DFA transition function 的定义，有
 
-\begin{equation*}
-\delta_{D}(\\{q_{0} \\}, w) = \delta_{D}(\\{q_{0}\\}, xa) = \delta_{D}(\delta_{D}(\\{q_{0}\\}, x), a) = \delta_{D}(S, a) = T
-\end{equation*}
+$$
+\delta_{D}(\{q_{0} \}, w) = \delta_{D}(\{q_{0}\}, xa) = \delta_{D}(\delta_{D}(\{q_{0}\}, x), a) = \delta_{D}(S, a) = T
+$$
 
-则 $\delta_{N}(q_{0}, w) = T  = \delta_{D}(\\{q_{0}\\}, w)$
+则 $\delta_{N}(q_{0}, w) = T  = \delta_{D}(\{q_{0}\}, w)$
 
 故
 
-\begin{align*}
-w \in L(N) &\iff \delta_{N}(q_{0}, w) \cap F_{N} \neq \varnothing\\\\
-&\iff \delta_{D}(\\{q_{0}\\}, w) \cap F_{N} \neq \varnothing\\\\
-&\iff \delta_{D}(\\{q_{0}\\}, w) \in F_{D}\\\\
+$$
+\begin{aligned}
+w \in L(N) &\iff \delta_{N}(q_{0}, w) \cap F_{N} \neq \varnothing\\
+&\iff \delta_{D}(\{q_{0}\}, w) \cap F_{N} \neq \varnothing\\
+&\iff \delta_{D}(\{q_{0}\}, w) \in F_{D}\\
 &\iff w \in L(D)
-\end{align*}
+\end{aligned}
+$$
 
 得证 $L(N) = L(D)$
 
@@ -254,16 +256,18 @@ $D$ 与 $E$ 接受相同语言，有相同的 alphabet，其余部分的构造�
 * $F_{D}$ 是满足 $S \in Q_{D} \land S \cap F_{E} \neq \varnothing$ 的 $S$ 的集合
 * $\delta_{D}(S, a)$ 的定义为，对于任意 $a \in \Sigma, S \in Q_{D}$
 
-  \begin{align*}
+  $$
+  \begin{aligned}
   T = \bigcup_{p \in S} \delta_{E}(p, a)\\\\
   \delta_{D}(S, a) = CL(T)
-  \end{align*}
+  \end{aligned}
+  $$
 
 证明其正确性只需证明对任意字符串 $w$ 满足
 
-\begin{equation*}
+$$
 \delta_{E}(q_{0}, w) = \delta_{D}(q_{D}, w)
-\end{equation*}
+$$
 
 根据 $w$ 的长度归纳证明即可
 

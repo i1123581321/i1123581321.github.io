@@ -18,10 +18,12 @@ Universal set: all possible elements
 
 De Morgan's Law:
 
-\begin{align*}
-\overline{A \cup B} = \overline{A} \cap \overline{B}\\\\
+$$
+\begin{aligned}
+\overline{A \cup B} = \overline{A} \cap \overline{B}\\
 \overline{A \cap B} = \overline{A} \cup \overline{B}
-\end{align*}
+\end{aligned}
+$$
 
 Null set: $\varnothing$
 
@@ -39,9 +41,9 @@ Cartesian Product: 笛卡尔积，$|A \times B| = |A| \cdot |B|$
 
 给定集合 $A, B$ ，函数 $f$ ，函数将每个 $A$ 中的元素映射到至多一个 $B$ 中的元素，记为
 
-\begin{equation*}
+$$
 f: A \to B
-\end{equation*}
+$$
 
 total function: $A =$ domain
 
@@ -61,9 +63,9 @@ Equivalence Relations: Reflexive, Symmetric and Transitive
 
 对于一个等价关系 $R$ ，可定义 Equivalence Class
 
-\begin{equation*}
-[x]_{R} = \\{y : x R y\\}
-\end{equation*}
+$$
+[x]_{R} = \{y : x R y\}
+$$
 
 两个等价类之间的关系只有相等或 disjoint
 
@@ -102,7 +104,7 @@ String: alphabet 中的符号组成的序列
 
 $\Sigma^{*}$: the set of all possible strings from alphabet $\Sigma$ (including $\lambda$)
 
-$\Sigma^{+}$: the set of all possible strings from alphabet $\Sigma$ except $\lambda$ , $\Sigma^{+} = \Sigma^{*} - \\{\lambda\\}$
+$\Sigma^{+}$: the set of all possible strings from alphabet $\Sigma$ except $\lambda$ , $\Sigma^{+} = \Sigma^{*} - \{\lambda\}$
 
 string 有几种运算，对于 string $w = a_{1}a_{2}\dots a_{n}, v = b_{1}b_{2}\dots b_{m}$
 
@@ -121,14 +123,14 @@ string 有几种运算，对于 string $w = a_{1}a_{2}\dots a_{n}, v = b_{1}b_{2
 
 Language 是 string 的集合，即 $\Sigma^{*}$ 的子集
 
-e.g. $L = \\{a^{n}b^{n}:n \geqslant 0\\}$ ，这个 Language 不能通过正则描述
+e.g. $L = \{a^{n}b^{n}:n \geqslant 0\}$ ，这个 Language 不能通过正则描述
 
 由于 Language 本质是集合，故集合的操作同样适用于 Language（Union，Intersection，Difference，Complement），$\overline{L} = \Sigma^{*} - L$
 
 除此之外还有一些 Language 独有的操作
 
-* reverse: $L^{R} = \\{w^{R} :w \in L\\}$
-* concatenation: $L_{1}L_{2} = \\{xy: x \in L_{1}, y \in L_{2}\\}$
-* $L^{n}=\underbrace{L L \cdots L}_{n}, L^{0} = \\{\lambda\\}$
+* reverse: $L^{R} = \{w^{R} :w \in L\}$
+* concatenation: $L_{1}L_{2} = \{xy: x \in L_{1}, y \in L_{2}\}$
+* $L^{n}=\underbrace{L L \cdots L}_{n}, L^{0} = \{\lambda\}$
 * Kleene Closure: $L^{*} = \bigcup_{i=0}^{\infty}L^{i}$
-* Positive Closure: $L^{+} = \bigcup_{i=1}^{\infty}L^{i} = L^{*} - \\{\lambda\\}$
+* Positive Closure: $L^{+} = \bigcup_{i=1}^{\infty}L^{i} = L^{*} - \{\lambda\}$

@@ -2,8 +2,8 @@
 title: 使用 Hexo 与 GitHub pages 快速搭建博客
 date: 2020-10-14 22:29:42
 tags:
-- hexo
-- github
+- "hexo"
+- "github"
 categories: ["computer science", "other"]
 mathjax: true
 ---
