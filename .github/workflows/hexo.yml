@@ -1,26 +1,33 @@
-name: Hexo CICD
+name: Pages
 
-on: # 监视 `hexo`分支
+on:
   push:
-      branches:
-      - hexo
+    branches:
+      - hexo  # default branch
 
 jobs:
-  build:
+  pages:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+      - name: Use Node.js 12.x
+        uses: actions/setup-node@v1
         with:
-          submodules: true
-      - name: Cache node modules
-        uses: actions/cache@v1
+          node-version: '12.x'
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
         with:
           path: node_modules
-          key: ${{runner.OS}}-${{hashFiles('**/package-lock.json')}}
-      - uses: yrpang/github-actions-hexo@v1.3
+          key: ${{ runner.OS }}-npm-cache
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          deploykey: ${{secrets.DEPLOY_KEY}}
-          username: ${{secrets.NAME}}
-          email: ${{secrets.EMAIL}}
+          github_token: ${{ secrets.DEPLOY_KEY }}
+          publish_dir: ./public
+          publish_branch: master  # deploying branch
