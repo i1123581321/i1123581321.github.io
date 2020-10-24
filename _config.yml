@@ -106,7 +106,7 @@ deploy:
   type: 'git'
   repo: git@github.com:i1123581321/i1123581321.github.io.git
   branch: master
-  message: "Github CI Auto Builder at {{ now('YYYY-MM-DD HH:mm:ss Z') }}"
+  message: "{{ now('YYYY-MM-DD HH:mm:ss Z') }}"
 
 
 
