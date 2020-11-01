@@ -262,10 +262,10 @@ $D$ 与 $E$ 接受相同语言，有相同的 alphabet，其余部分的构造�
 * $\delta_{D}(S, a)$ 的定义为，对于任意 $a \in \Sigma, S \in Q_{D}$
 
   $$
-  \begin{aligned}
-  T = \bigcup_{p \in S} \delta_{E}(p, a)\\\\
+  \begin{gathered}
+  T = \bigcup_{p \in S} \delta_{E}(p, a)\\
   \delta_{D}(S, a) = CL(T)
-  \end{aligned}
+  \end{gathered}
   $$
 
 证明其正确性只需证明对任意字符串 $w$ 满足

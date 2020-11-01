@@ -24,10 +24,10 @@ Universal set: all possible elements
 De Morgan's Law:
 
 $$
-\begin{aligned}
+\begin{gathered}
 \overline{A \cup B} = \overline{A} \cap \overline{B}\\
 \overline{A \cap B} = \overline{A} \cup \overline{B}
-\end{aligned}
+\end{gathered}
 $$
 
 Null set: $\varnothing$
