@@ -118,6 +118,8 @@ $ hexo clean
 
 ## 持续集成
 
+更新：使用 pandoc 做渲染的话 CI 会报错，老老实实 `hexo deploy -g`
+
 持续集成（CI, Continuous Integration）可以自动完成部署工作（清理，生成静态文件，部署）
 
 官方网站给出的[持续集成](https://hexo.io/docs/github-pages.html)是通过 Github Actions 实现的，这里使用 [github-actions-hexo](https://github.com/yrpang/github-actions-hexo) 的方案
