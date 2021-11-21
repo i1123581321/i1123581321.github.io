@@ -5,7 +5,7 @@ tags:
 - "hexo"
 - "github"
 categories: ["computer science", "other"]
-mathjax: false
+mathjax: true
 documentclass: ctexart
 classoption: UTF8
 geometry:
