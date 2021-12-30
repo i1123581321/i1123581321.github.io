@@ -11,9 +11,9 @@ tags: "theory"
 categories: ["course notes", "theory of computation"]
 ---
 
-## Regular expression
+# Regular expression
 
-### Definition
+## Definition of RE
 
 Regular expressions describe language (regular languages)
 
@@ -42,7 +42,7 @@ Induction.
 
 操作优先级由高到低是 $*$，concatenation，$+$
 
-### Algebraic Laws for RE
+Algebraic Laws for RE:
 
 * Union is commutative and associative, concatenation is associative
 * Concatenation distributes over union
@@ -51,7 +51,7 @@ Induction.
 * $\varnothing$ is the annihilator for concatenation, $\varnothing R = R\varnothing = \varnothing$
 * Union is idempotent: $L + L = L$
 
-### Laws Involving Closures
+Laws Involving Closures:
 
 * $(L^{*})^{*} = L^{*}$
 * $\varnothing^{*} = \{\epsilon\}$
@@ -100,7 +100,7 @@ Pick DFA
 
 使用归纳。假设 DFA 的状态为 $1,2, \dots, n$
 
-定义 $k$-Path: A $k$-Path is a path through the graph of the DFA that goes through **no state numbered higher than** $k$
+定义 $k$-Path: A $k$-Path is a path through the graph of the DFA that goes through *no state numbered higher than* $k$
 
 $k$-path 的 endpoint 没有限制，$n$-path 可以是任意路径
 
@@ -147,7 +147,7 @@ Language classes have two important kinds of properties
 
 Closure properties: given languages in the class, an operation produces another language in the same class
 
-**Decision properties**: an **algorithm** that takes a formal description of a language and tells whether or not some property holds
+Decision properties: an *algorithm* that takes a formal description of a language and tells whether or not some property holds
 
 * Membership problem: is string $w$ in regular language $L$
 * Emptiness problem: does the language contain any string at all
@@ -162,19 +162,15 @@ Let $L$ be a regular language. Then there exists a constant $n$ (which depends o
 
 pumping lemma 可以用于证明一个 language 不是 RL
 
-### Decision Properties of Regular Language
+## Decision Properties of Regular Language
 
-#### The membership problem
-
-Problem: Given a string $w$ and a regular language $L$ , is $w$ in $L$
+**The membership problem**: Given a string $w$ and a regular language $L$ , is $w$ in $L$
 
 Algorithm: Simulate the DFA, if the DFA ends in an accepting state, the answer is "yes", otherwise the answer is "no"
 
-#### The emptiness problem
+**The emptiness problem**: Given a regular language, does the language contain any string at all
 
-Problem: Given a regular language, does the language contain any string at all
-
-Algorithm: Compute the set of states **reachable** from the start state. If at least one final state is reachable, then yes, else no.
+Algorithm: Compute the set of states *reachable* from the start state. If at least one final state is reachable, then yes, else no.
 
 reachable 的定义是递归给出的
 
@@ -193,9 +189,7 @@ Induction. Suppose $R$ is a RE. There are four cases to consider.
 3. $R = R_{1}^{*}$. Then $L(R)$ is not empty, it always includes at least $\epsilon$
 4. $R = (R_{1})$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty
 
-#### The infiniteness problem
-
-Problem: Is a given language infinite?
+**The infiniteness problem**: Is a given language infinite?
 
 Key Idea: if the DFA has $n$ states, and the language contains ant string of length $n$ or more, then the language is infinite.
 
@@ -247,9 +241,7 @@ Q.E.D.
 2. Eliminate states that do not reach a final state
 3. Test if the remaining transition graph has any cycles
 
-#### The equivalence problem
-
-Problem: Given regular languages $L$ and $M$, is $L = M$
+**The equivalence problem**: Given regular languages $L$ and $M$, is $L = M$
 
 Algorithm: Constructing the **product DFA** from DFA for $L, M$
 
@@ -265,9 +257,7 @@ Algorithm: Constructing the **product DFA** from DFA for $L, M$
 
 $L = M \iff$ the product DFA's language is empty
 
-#### The containment problem
-
-Problem: Given regular languages $L$ and $M$ , is $L \subseteq M$
+**The containment problem**: Given regular languages $L$ and $M$ , is $L \subseteq M$
 
 Algorithm: use the product DFA
 
@@ -275,9 +265,9 @@ final state: states $[q, r]$ that $q$ is the final state, $r$ is not
 
 $L \subseteq M \iff$ the product DFA's language is empty
 
-### The Minimum-State DFA for a Regular Language
+## The Minimum-State DFA for a Regular Language
 
-#### Equivalence of states
+### Equivalence of states
 
 Given a DFA $A$, find the DFA with the fewest states accepting $L(A)$ (equivalence)
 
@@ -292,12 +282,10 @@ that one of $\delta(p, w)$ and  $\delta(q, w)$ is accepting, and the other is no
 Algorithm: table-filling algorithm
 
 * Construct a table with all pairs of states
-* If you find a string that **distinguishes** two states (takes exactly one to an accepting state), mark that pair
-* Algorithm is a **recursion** on the length of the shortest distinguishing string
-
-  Basis. If $p$ is an accepting state and $q$ is non-accepting, then the pair $[p, q]$ is distinguishable
-
-  Induction. Let $p$ and $q$ be states such that for some input symbol $a$, $r = \delta(p, a)$ and $s = \delta(q, a)$ are a pair of states known to be distinguishable. Then $[p, q]$ is a pair of distinguishable states.
+* If you find a string that *distinguishes* two states (takes exactly one to an accepting state), mark that pair
+* Algorithm is a *recursion* on the length of the shortest distinguishing string
+  * Basis. If $p$ is an accepting state and $q$ is non-accepting, then the pair $[p, q]$ is distinguishable
+  * Induction. Let $p$ and $q$ be states such that for some input symbol $a$, $r = \delta(p, a)$ and $s = \delta(q, a)$ are a pair of states known to be distinguishable. Then $[p, q]$ is a pair of distinguishable states.
 
 在算法结束后，所有未被标记的 pair 是等价的状态
 
@@ -320,7 +308,7 @@ Q.E.D.
 
 $L = M \iff$ 两个 DFA 的开始状态 $q_{0}, r_{0}$ 等价
 
-#### Minimize DFA
+### Minimize DFA
 
 要最小化一个 DFA ，首先要合并所有不可区分的状态
 
@@ -354,7 +342,7 @@ Q.E.D.
 
 包含开始状态的等价类为新 DFA 的开始状态，包含接受状态的等价类为新 DFA 的接收状态
 
-#### Minimized DFA can't be beaten
+### Minimized DFA can't be beaten
 
 > If $A$ is a DFA, and $M$ the DFA constructed from $A$ by the algorithm of minimizing DFA, then $M$ has as few states as any DFA equivalent to $A$
 
@@ -385,11 +373,9 @@ Q.E.D.
 
 Q.E.D.
 
-### Closure Properties of Regular Language
+## Closure Properties of Regular Language
 
-#### Closure Under Union
-
-If $L$ and $M$ are regular languages, then so is $L \cup M$
+**Closure Under Union**: If $L$ and $M$ are regular languages, then so is $L \cup M$
 
 Proof.
 
@@ -399,9 +385,7 @@ Q.E.D.
 
 Concatenation 与 Kleene Closure 的证明同理，根据 RE 的定义即可证明其封闭性：$RS$ 是 $LM$ 的 RE，$R^{*}$ 是 $L^{*}$ 的 RE
 
-#### Closure Under Complementation
-
-If $L$ is a regular language over alphabet $\Sigma$ , then $\overline{L} = \Sigma^{*} - L$ is also a regular language
+**Closure Under Complementation**: If $L$ is a regular language over alphabet $\Sigma$ , then $\overline{L} = \Sigma^{*} - L$ is also a regular language
 
 Proof.
 
@@ -423,9 +407,7 @@ $$
 
 Q.E.D.
 
-#### Closure Under Insertion
-
-If $L$ and $M$ are regular languages, then so is $L \cap M$
+**Closure Under Insertion**: If $L$ and $M$ are regular languages, then so is $L \cap M$
 
 Proof.
 
@@ -466,9 +448,7 @@ Proof.
 
 Q.E.D.
 
-#### Closure Under Difference
-
-If $L$ and $M$ are regular languages, then so is $L - M$
+**Closure Under Difference**: If $L$ and $M$ are regular languages, then so is $L - M$
 
 Proof.
 
@@ -476,13 +456,7 @@ $L - M = L \cap \overline{M}$ ，根据 complementation 与 insertion 的封闭�
 
 Q.E.D.
 
-#### Closure Under Reversal
-
-对于一个字符串 $w = a_{1}a_{2}\dots a_{n}$ ，其 reversal $w^{R} = a_{n}a_{n-1} \dots a_{1}$
-
-对于一个语言 $L$ ，$L^{R} = \{w^{R}:w \in L\}$
-
-If $L$ is a regular language, so is $L^{R}$
+**Closure Under Reversal**: 对于一个字符串 $w = a_{1}a_{2}\dots a_{n}$ ，其 reversal $w^{R} = a_{n}a_{n-1} \dots a_{1}$，对于一个语言 $L$, $L^{R} = \{w^{R}:w \in L\}$ If $L$ is a regular language, so is $L^{R}$
 
 Proof.
 
@@ -510,9 +484,7 @@ Induction.
 
 Q.E.D.
 
-#### Closure Under Homomorphisms
-
-A string homomorphism is a **function** on strings that works by substituting a particular string for each symbol
+**Closure Under Homomorphisms**: A string homomorphism is a **function** on strings that works by substituting a particular string for each symbol
 
 If $h$ is a homomorphism on alphabet $\Sigma$, and $w = a_{1}a_{2} \dots a_{n}$ is a string of symbols in $\Sigma$ ,then $h(w) = h(a_{1})h(a_{2})\dots h(a_n)$
 
@@ -566,9 +538,7 @@ Concatenation 与 Kleene star 的证明类似
 
 Q.E.D.
 
-#### Closure Under Inverse Homomorphisms
-
-Suppose $h$ is a homomorphism from alphabet $\Sigma$ to strings in another (possibly the same) alphabet $T$. Let $L$ be a language over alphabet $T$. Then
+**Closure Under Inverse Homomorphisms**: Suppose $h$ is a homomorphism from alphabet $\Sigma$ to strings in another (possibly the same) alphabet $T$. Let $L$ be a language over alphabet $T$. Then
 
 $$
 h^{-1}(L) = \{w: w \in \Sigma^{*}, h(w) \in L \}

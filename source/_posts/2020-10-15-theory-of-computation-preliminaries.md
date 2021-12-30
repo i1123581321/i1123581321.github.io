@@ -11,9 +11,9 @@ geometry:
 - a4paper
 ---
 
-## Mathematical Preliminaries
+# Mathematical Preliminaries
 
-### Sets
+## Sets
 
 集合根据元素数量可分为 finite set 和 infinite set
 
@@ -38,19 +38,19 @@ Disjoint Sets: $A \cap B = \varnothing$
 
 集合中元素的数量称为集合的势（Cardinality），记为 $|A|$
 
-**Power set**: a set of sets, 是所有子集的集合，记为 $P(S)$ 或 $2^{S}$ ，有 $|2^{S}| = 2^{|S|}$
+Power set: a set of sets, 是所有子集的集合，记为 $P(S)$ 或 $2^{S}$ ，有 $|2^{S}| = 2^{|S|}$
 
 Cartesian Product: 笛卡尔积，$|A \times B| = |A| \cdot |B|$
 
-### Functions
+## Functions
 
-给定集合 $A, B$ ，函数 $f$ ，函数将每个 $A$ 中的元素映射到至多一个 $B$ 中的元素，记为
+给定集合 $A, B$ ，函数 $f$ ，函数将每个 $A$ 中的元素映射到*至多一个* $B$ 中的元素，记为
 
 $$
 f: A \to B
 $$
 
-total function: $A =$ domain
+total function: $A = \mathrm{domain}$
 
 injective function: $\forall a, a' \in A, a \neq a' \to f(a) \neq f(a')$
 
@@ -60,7 +60,7 @@ surjective function: $\forall b \in B, \exists a \in A, f(a) = b$
 
 Big O notation: 参见 [Asymptotic](https://i1123581321.github.io/NJU-open-resource/algorithm_design_and_analysis/notes/L_2.pdf)
 
-### Relations
+## Relations
 
 Given two sets, $A, B$ , a **relation** $R$ is any subset of $A \times B$
 
@@ -76,10 +76,10 @@ $$
 
 对于 $A$ 上的关系 $R$ ，有
 
-* Partial order: Reflexive, Transitive and **Antisymmetric**
+* Partial order: Reflexive, Transitive and *Antisymmetric*
 * Total order: partial order and $\forall a, b \in A$ , either $aRb$ or $bRa$, also called **linear order**
 
-### Graphs
+## Graphs
 
 a directive graph $G = <V,E>$
 
@@ -91,7 +91,7 @@ a directive graph $G = <V,E>$
 
 A **tree** is a directed graph that has no **cycle**.
 
-### Proof Techniques
+## Proof Techniques
 
 归纳法 or 归谬法
 

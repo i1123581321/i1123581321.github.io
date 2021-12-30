@@ -11,7 +11,7 @@ geometry:
 - a4paper
 ---
 
-## Finite Automata
+# Finite Automata
 
 Finite automata is a formal system with only a finite amount of information
 
@@ -20,7 +20,7 @@ Finite automata is a formal system with only a finite amount of information
 * Rules that tell how the state changes in response to
   inputs are called **transitions**
 
-Acceptance：对一个输入的序列（input string），从起始状态开始按照 transition 的规则转换状态，该输入如果被接受（**accepted**）当且仅当所有输入被读入后 FA 停留在终止状态
+Acceptance：对一个输入的序列（input string），从起始状态开始按照 transition 的规则转换状态，该输入被接受（**accepted**） $\iff$ 所有输入被读入后 FA 停留在终止状态
 
 Language of an Automata: The set of strings accepted by an automata $A$ is the language of $A$ , denoted $L(A)$
 
@@ -62,12 +62,6 @@ Basis. $\delta(q, \epsilon) = q$
 
 Induction. $\delta(q, wa) = \delta(\delta(q, w), a)$
 
-Extend transition function 与 transition function 不做区分
-
-$$
-\hat{\delta}(q, a) = \delta(\hat{\delta}(q, \epsilon), a) = \delta(q, a)
-$$
-
 ### Language of DFA
 
 各种各样的 Automata 都定义语言，对于 DFA $A$ ，其定义的语言的形式化定义如下
@@ -78,7 +72,7 @@ $$
 
 **Regular language**: a language is regular if it is the language accepted by some DFA
 
-e.g. A Nonregular Language: $L = \{0^{n}1^{n} : n \geqslant 1 \}$
+A Nonregular Language: $L = \{0^{n}1^{n} : n \geqslant 1 \}$
 
 Proof.
 
@@ -104,7 +98,7 @@ Q.E.D.
 
 ### Nondeterminism
 
-NFA 的 transition 结果可以是一个状态的集合
+NFA 的 transition 结果可以是一个状态的*集合*
 
 An NFA is represented formally by a 5-tuple, $(Q, \Sigma, \delta, q_{0}, F)$ ，consisting of
 
@@ -112,9 +106,9 @@ An NFA is represented formally by a 5-tuple, $(Q, \Sigma, \delta, q_{0}, F)$ ，
 * a finite set of input symbols $\Sigma$
 * a transition function $\delta: Q \times \Sigma \to P(Q)$
 * an initial state $q_0 \in Q$
-* a set of states $F$ distinguished as final states $F \in Q$
+* a set of states $F$ distinguished as final states, $F \in Q$
 
-对于 NFA ，$\delta(q, a)$ 的输出是一个状态的集合。其 Extended 的递归定义
+对于 NFA ，$\delta(q, a)$ 的输出是一个状态的集合。其 Extended 的递归定义如下
 
 Basis. $\delta(q, \epsilon) = \{q\}$
 
@@ -126,7 +120,7 @@ $$
 L(A) = \{w:\delta(q_0, w) \cap F \neq \varnothing \}
 $$
 
-即只要存在一条运行路径结束于接收状态即可认为接受该 string
+即只要*存在一条*运行路径结束于接收状态即可认为接受该 string
 
 ### NFA with $\epsilon$-transitions
 
@@ -134,21 +128,21 @@ $$
 
 定义 Closure of states:
 
-* $CL(q)$ = set of states you can reach from state $q$ following only arcs labeled $\epsilon$
-  * Basis. $q \in CL(q)$
-  * Induction. 如果 $p \in CL(q)$ 且有一条从 $p$ 到 $r$ 的边标号为 $\epsilon$ ，则 $r \in CL(q)$
-* $CL(S) = \bigcup_{q \in S}CL(q)$
+* $\mathrm{CL}(q)$ = set of states you can reach from state $q$ following only arcs labeled $\epsilon$
+  * Basis. $q \in \mathrm{CL}(q)$
+  * Induction. 如果 $p \in \mathrm{CL}(q)$ 且有一条从 $p$ 到 $r$ 的边标号为 $\epsilon$ ，则 $r \in \mathrm{CL}(q)$
+* $\mathrm{CL}(S) = \bigcup_{q \in S}\mathrm{CL}(q)$
 
-在 $\epsilon$-NFA 上可定义扩展的转换函数 $\hat{\delta}(q, w)$
+在 $\epsilon$-NFA 上可定义扩展的转换函数 $\delta(q, w)$
 
-Basis. $\hat{\delta}(q, \epsilon) = CL(q)$
+Basis. $\delta(q, \epsilon) = CL(q)$
 
-Induction. $\hat{\delta}(q, xa) = \bigcup_{p \in \hat{\delta}(q, x)}CL(\delta(p, a))$
+Induction. $\delta(q, xa) = \bigcup_{p \in \delta(q, x)}CL(\delta(p, a))$
 
 $\epsilon$-NFA $A$ 定义的 language 即为
 
 $$
-L(A) = \{w:\hat{\delta}(q_0, w) \cap F \neq \varnothing \}
+L(A) = \{w:\delta(q_0, w) \cap F \neq \varnothing \}
 $$
 
 ## Equivalence of DFA, NFA
@@ -193,7 +187,7 @@ $$
 \delta_{N}(q_{0}, \epsilon) = \delta_{D}(\{q_{0}\}, \epsilon) = \{q_{0}\}
 $$
 
-Induction. 令 $w = xa$ ，根据 I. H. 有
+Induction. 令 $w = xa$ ，根据 I.H. 有
 
 $$
 \delta_{N}(q_{0}, x) = \delta_{D}(\{q_{0}\}, x) = S
@@ -256,15 +250,15 @@ Proof.
 
 $D$ 与 $E$ 接受相同语言，有相同的 alphabet，其余部分的构造为
 
-* $Q_{D}$ 是 $Q_{E}$ 的 power set，且任意 $S \in Q_{D}$ 满足 $S = CL(S)$ ，换言之，$S$ 是一个 $\epsilon$-closed set
-* $q_{D} = CL(q_{0})$
+* $Q_{D}$ 是 $Q_{E}$ 的 power set，且任意 $S \in Q_{D}$ 满足 $S = \mathrm{CL}(S)$ ，换言之，$S$ 是一个 $\epsilon$-closed set
+* $q_{D} = \mathrm{CL}(q_{0})$
 * $F_{D}$ 是满足 $S \in Q_{D} \land S \cap F_{E} \neq \varnothing$ 的 $S$ 的集合
 * $\delta_{D}(S, a)$ 的定义为，对于任意 $a \in \Sigma, S \in Q_{D}$
 
   $$
   \begin{gathered}
   T = \bigcup_{p \in S} \delta_{E}(p, a)\\
-  \delta_{D}(S, a) = CL(T)
+  \delta_{D}(S, a) = \mathrm{CL}(T)
   \end{gathered}
   $$
 
