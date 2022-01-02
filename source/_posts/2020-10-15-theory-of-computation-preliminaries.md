@@ -62,7 +62,7 @@ Big O notation: 参见 [Asymptotic](https://i1123581321.github.io/NJU-open-resou
 
 ## Relations
 
-Given two sets, $A, B$ , a **relation** $R$ is any subset of $A \times B$
+Given two sets, $A, B$ , a relation $R$ is any subset of $A \times B$
 
 Equivalence Relations: Reflexive, Symmetric and Transitive
 
@@ -77,7 +77,7 @@ $$
 对于 $A$ 上的关系 $R$ ，有
 
 * Partial order: Reflexive, Transitive and *Antisymmetric*
-* Total order: partial order and $\forall a, b \in A$ , either $aRb$ or $bRa$, also called **linear order**
+* Total order: partial order and $\forall a, b \in A$ , either $aRb$ or $bRa$, also called *linear order*
 
 ## Graphs
 
@@ -89,7 +89,7 @@ a directive graph $G = <V,E>$
 * Cycle: a walk from a node to itself
 * Simple cycle: only the base node is repeated
 
-A **tree** is a directed graph that has no **cycle**.
+A *tree* is a directed graph that has no *cycle*.
 
 ## Proof Techniques
 
@@ -122,7 +122,7 @@ string 有几种运算，对于 string $w = a_{1}a_{2}\dots a_{n}, v = b_{1}b_{2
 * suffix: when $x = ys(z = \epsilon)$ , $s$ is called a suffix of $x$
 * $w^{n}=\underbrace{w w \cdots w}_{n} , w^{0} = \lambda$
 
-解决字符串相关的问题时，一般根据其**长度**进行分情况讨论
+解决字符串相关的问题时，一般根据其*长度*进行分情况讨论
 
 ### Languages
 

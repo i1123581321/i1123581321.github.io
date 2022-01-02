@@ -15,12 +15,12 @@ geometry:
 
 Finite automata is a formal system with only a finite amount of information
 
-* Information represented by its **state**
-* State changes in response to **inputs**
+* Information represented by its state
+* State changes in response to inputs
 * Rules that tell how the state changes in response to
-  inputs are called **transitions**
+  inputs are called transitions
 
-Acceptance：对一个输入的序列（input string），从起始状态开始按照 transition 的规则转换状态，该输入被接受（**accepted**） $\iff$ 所有输入被读入后 FA 停留在终止状态
+Acceptance：对一个输入的序列（input string），从起始状态开始按照 transition 的规则转换状态，该输入被接受 $\iff$ 所有输入被读入后 FA 停留在终止状态
 
 Language of an Automata: The set of strings accepted by an automata $A$ is the language of $A$ , denoted $L(A)$
 
@@ -56,7 +56,7 @@ DFA 也可以以图的形式表示
 * 起始状态用箭头标注
 * 接收状态用 \* 标注
 
-**Extend transition function** 接受一个 state 和一个 string 作为输入，递归定义如下
+**Extend transition function**: 接受一个 state 和一个 string 作为输入，递归定义如下
 
 Basis. $\delta(q, \epsilon) = q$
 
@@ -169,7 +169,7 @@ $D$ 的开始状态为一个集合，其中唯一的元素是 $N$ 的开始状�
   \delta_{D}(S, a) = \bigcup_{p \in S}\delta_{N}(p, a)
   $$
 
-**Critical Point**: DFA 的状态为 NFA 状态的**集合**
+**Critical Point**: DFA 的状态为 NFA 状态的集合
 
 证明其正确性只需证明对字符串 $w$ ，有
 

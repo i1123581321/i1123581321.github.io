@@ -138,7 +138,7 @@ The RE with the same language as the DFA is the union of $R_{ij}^{n}$ where
 
 ### Properties
 
-A **language class** is a set of languages
+A language class is a set of languages
 
 Language classes have two important kinds of properties
 
@@ -184,8 +184,8 @@ Basis. $\varnothing$ denotes the empty language, $\epsilon$ and $a$ for any inpu
 
 Induction. Suppose $R$ is a RE. There are four cases to consider.
 
-1. $R = R_{1} + R_{2}$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty **and** $L(R_{2})$ is empty
-2. $R = R_{1}R_{2}$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty **or** $L(R_{2})$ is empty
+1. $R = R_{1} + R_{2}$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty *and* $L(R_{2})$ is empty
+2. $R = R_{1}R_{2}$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty *or* $L(R_{2})$ is empty
 3. $R = R_{1}^{*}$. Then $L(R)$ is not empty, it always includes at least $\epsilon$
 4. $R = (R_{1})$. Then $L(R)$ is empty $\iff$ $L(R_{1})$ is empty
 
@@ -243,7 +243,7 @@ Q.E.D.
 
 **The equivalence problem**: Given regular languages $L$ and $M$, is $L = M$
 
-Algorithm: Constructing the **product DFA** from DFA for $L, M$
+Algorithm: Constructing the product DFA from DFA for $L, M$
 
 设 $L$ 与 $M$ 的 DFA 有状态集合 $Q$ 与 $R$ ，则 product DFA 有状态集合 $Q \times R$
 
@@ -271,11 +271,11 @@ $L \subseteq M \iff$ the product DFA's language is empty
 
 Given a DFA $A$, find the DFA with the fewest states accepting $L(A)$ (equivalence)
 
-Equivalence of states: states $p$ and $q$ are **equivalent** if
+Equivalence of states: states $p$ and $q$ are equivalent if
 
 For all input strings $w$ , $\delta(p, w)$ is an accepting state $\iff$ $\delta(q, w)$ is an accepting state
 
-If two states are not equivalent, then we say they are **distinguishable**. That
+If two states are not equivalent, then we say they are *distinguishable*. That
 is, state $p$ is distinguishable from state $q$ if there is at least one string $w$ such
 that one of $\delta(p, w)$ and  $\delta(q, w)$ is accepting, and the other is not accepting.
 
@@ -407,7 +407,7 @@ $$
 
 Q.E.D.
 
-**Closure Under Insertion**: If $L$ and $M$ are regular languages, then so is $L \cap M$
+**Closure Under Intersection**: If $L$ and $M$ are regular languages, then so is $L \cap M$
 
 Proof.
 
@@ -452,7 +452,7 @@ Q.E.D.
 
 Proof.
 
-$L - M = L \cap \overline{M}$ ，根据 complementation 与 insertion 的封闭性，$L - M$ 也是 RE
+$L - M = L \cap \overline{M}$ ，根据 complementation 与 intersection 的封闭性，$L - M$ 也是 RE
 
 Q.E.D.
 
@@ -484,7 +484,7 @@ Induction.
 
 Q.E.D.
 
-**Closure Under Homomorphisms**: A string homomorphism is a **function** on strings that works by substituting a particular string for each symbol
+**Closure Under Homomorphisms**: A string homomorphism is a *function* on strings that works by substituting a particular string for each symbol
 
 If $h$ is a homomorphism on alphabet $\Sigma$, and $w = a_{1}a_{2} \dots a_{n}$ is a string of symbols in $\Sigma$ ,then $h(w) = h(a_{1})h(a_{2})\dots h(a_n)$
 

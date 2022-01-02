@@ -11,6 +11,8 @@ tags: "theory"
 categories: ["course notes", "theory of computation"]
 ---
 
+# Pushdown Automata
+
 ## Definition
 
 Informal: PDA is a $\epsilon$-NFA with a stack
@@ -31,17 +33,13 @@ Formal: A PDA is a 7-tuple, $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ w
 * $a$ 是 $\Sigma$ 中的符号或是 $\epsilon$
 * $X$ 是 $\Gamma$ 中的符号
 
-其输出为有序对 $(p, \gamma)$ 的集合，其中 $p$ 是一个新状态，而 $\gamma$ 是一个 stack symbol 的 string，用于**取代** $X$ ，当 $\gamma = \epsilon$ ，表示弹出 $X$ ，而当 $\gamma = X$ 则不变，若 $\gamma = Y Z$ ，则将 $X$ 替换为 $Z$，再将 $Y$ 压入。
-
-需注意 $\delta$ 的输出是一个集合，即 PDA 可以从中选出一个对
+其输出为有序对 $(p, \gamma)$ 的集合，其中 $p$ 是一个新状态，而 $\gamma$ 是一个 stack symbol 的 string，用于*取代* $X$。当 $\gamma = \epsilon$，表示弹出 $X$ ，而当 $\gamma = X$ 则不变，若 $\gamma = Y Z$，则将 $X$ 替换为 $Z$，再将 $Y$ 压入。
 
 PDA 也可以像 FA 一样使用图表示，其中
 
 * 节点代表 PDA 的 states
 * 两个圈的节点表示接收状态
 * 一条标号为 $a, X/ \alpha$ 的从 $q$ 到 $p$ 的边表示 $(p, \alpha) \in \delta(q, a, X)$
-
-## Instantaneous Descriptions
 
 不同于 FA，描述状态机的运行的只有状态，PDA 的运行包括了状态与栈的内容，故定义 Instantaneous Description 为一个 3-tuple $(q, w, \gamma)$
 
@@ -101,9 +99,7 @@ then $(q, x, \alpha) \vdash^{*} (p, y, \beta)$
 
 可以得出这两种方式是等价的，即给定一个语言 $L$ ，存在一个 PDA 以 acceptance by final state 的方式定义 $L$ ，也存在一个 PDA 以 acceptance by empty stack 的方式定义 $L$ 。但对于同一个 PDA 而言，以两种方式定义的语言一般是不同的
 
-### Acceptance by Final State
-
-设 PDA $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ ，则 language accepted by $P$ by final state 定义为
+**Acceptance by Final State**: 设 PDA $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ ，则 language accepted by $P$ by final state 定义为
 
 $$
 L(P) = \{w : (q_{0}, w, Z_{0}) \vdash^{*} (q, \epsilon, \alpha) \}, q \in F
@@ -111,9 +107,7 @@ $$
 
 即在输入结束后，PDA 到达接收状态，而此时栈中可以是任意内容
 
-### Acceptance by Empty Stack
-
-设 PDA $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ ，则 language accepted by $P$ by empty stack 定义为
+**Acceptance by Empty Stack**: 设 PDA $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ ，则 language accepted by $P$ by empty stack 定义为
 
 $$
 N(P) = \{w : (q_{0}, w, Z_{0}) \vdash^{*} (q, \epsilon, \epsilon) \}
@@ -121,9 +115,9 @@ $$
 
 即输入结束后栈清空则视为接受，PDA 此时可以处于任意状态
 
-### From Empty Stack to Final State
-
 事实上，$L(P), N(P)$ 定义的语言集合是相同的，即 CFL。
+
+### From Empty Stack to Final State
 
 If $L = N(P_{N})$ for some PDA $P_{N} = (Q, \Sigma, \Gamma, \delta_{N}, q_{0}, Z_{0}, F)$ , then there is a PDA $P_{F}$ such that $L = L(P_{F})$
 
@@ -140,8 +134,8 @@ $$
 其中 $\delta_{F}$ 的定义为
 
 * $\delta_{F}(p_{0}, \epsilon, X_{0}) = \{(q_{0}, Z_{0}X_{0}) \}$ ，即开始时 $P_{F}$ 将 $Z_{0}$ 压入栈中，同时转移到 $P_{N}$ 的开始状态
-* 对于所有 $q \in Q, a \in \Sigma, a = \epsilon, Y \in \Gamma$ ，有 $\delta_{N}(q, a, Y) \subseteq \delta_{F}(q, a, Y)$ ，即 $P_{F}$ 模拟 $P_{N}$ 的运行
-* 对于所有 $q \in Q$ ，有 $(p_{f},\epsilon) \in \delta_{F}(q, \epsilon, X_{0})$
+* 对于所有 $q \in Q, a \in \Sigma \cup \{\epsilon\}, Y \in \Gamma$，有 $\delta_{N}(q, a, Y) \subseteq \delta_{F}(q, a, Y)$ ，即 $P_{F}$ 模拟 $P_{N}$ 的运行
+* 对于所有 $q \in Q$，有 $(p_{f},\epsilon) \in \delta_{F}(q, \epsilon, X_{0})$
 
 只需证明
 
@@ -205,10 +199,10 @@ $$
 
 其中 $\delta_{N}$ 的定义为
 
-* $\delta_{N}(p_{0}, \epsilon, X_{0}) = \{(q_{0}, Z_{0}X_{0})\}$ ，开始时 $P_{N}$ 将 $Z_{0}$ 压入栈中，转到 $P_{F}$ 的开始状态
-* 对于所有 $q \in Q, a \in \Sigma, a = \epsilon, Y \in \Gamma$ ，有 $\delta_{F}(q, a, Y) \subseteq \delta_{N}(q, a, Y)$ ，即 $P_{N}$ 模拟 $P_{F}$ 的运行
-* 对于所有 $q \in F, Y \in \Gamma, Y = X_{0}$ 有 $(p, \epsilon) \in \delta_{N}(q, \epsilon, Y)$ ，即当 $P_{F}$ 接受输入时，$P_{N}$ 开始将自己的栈清空，不再消耗输入
-* 对于所有的 $Y \in \Gamma, Y = X_{0}$ 有 $\delta_{N}(p, \epsilon, Y) = \{(p, \epsilon)\}$ ，即当进入状态 $p$ 后，$P_{N}$ 将栈中所有的符号弹出直至栈为空，然后接受该输入
+* $\delta_{N}(p_{0}, \epsilon, X_{0}) = \{(q_{0}, Z_{0}X_{0})\}$，开始时 $P_{N}$ 将 $Z_{0}$ 压入栈中，转到 $P_{F}$ 的开始状态
+* 对于所有 $q \in Q, a \in \Sigma, a = \epsilon, Y \in \Gamma$，有 $\delta_{F}(q, a, Y) \subseteq \delta_{N}(q, a, Y)$，即 $P_{N}$ 模拟 $P_{F}$ 的运行
+* 对于所有 $q \in F, Y \in \Gamma, Y = X_{0}$ 有 $(p, \epsilon) \in \delta_{N}(q, \epsilon, Y)$，即当 $P_{F}$ 接受输入时，$P_{N}$ 开始将自己的栈清空，不再消耗输入
+* 对于所有的 $Y \in \Gamma, Y = X_{0}$ 有 $\delta_{N}(p, \epsilon, Y) = \{(p, \epsilon)\}$，即当进入状态 $p$ 后，$P_{N}$ 将栈中所有的符号弹出直至栈为空，然后接受该输入
 
 只需证明
 
@@ -254,11 +248,11 @@ Q.E.D.
 
 正如 CFG 一样，PDA 定义的语言正好是 CFL（无论是 acceptance by empty stack 还是 acceptance by final state），这说明 PDA 和 CFG 表达能力是等价的
 
-### From Grammars to Pushdown Automata
+### From Grammars to PDA
 
 基本思路为，给出一个 CFG，可以构造一个 PDA 模拟其最左推导过程。而最左推导的每一步是由最左句型来完全表示的。
 
-任何非 terminal string 的最左句型都可以写为 $xA\alpha$ ，其中 $A$ 是最左的 variable。称 $A\alpha$ 为句型的 **tail** ，对于一个仅包含 terminal 的最左句型，其 tail 为 $\epsilon$
+任何非 terminal string 的最左句型都可以写为 $xA\alpha$ ，其中 $A$ 是最左的 variable。称 $A\alpha$ 为句型的 tail ，对于一个仅包含 terminal 的最左句型，其 tail 为 $\epsilon$
 
 使用 PDA 模拟最左推导的思路在于令最左句型 $xA\alpha$ 的 tail $A \alpha$ 出现在栈中，而 $x$ 是已经消耗的输入，考虑输入字符串 $w = xy$ ，$y$ 为剩余的输入，则 PDA 的 ID  $(q, y, A\alpha)$ 可以代表最左句型 $xA\alpha$ 。假设下一步用于展开 $A$ 的产生式为 $A \to \beta$ ，则 PDA 的动作是用 $\beta$ 替换栈顶的 $A$ ，ID 转换为 $(q, y, \beta \alpha)$ ，该 PDA 中只有一个状态 $q$ ，而现在的 ID 可能不能代表一个最左句型，因为 $\beta$ 可能有 terminal 作为前缀，因此需要消耗输入，同时从栈中移除对应的 terminal，直至有一个 variable 出现在了栈顶
 
@@ -305,7 +299,7 @@ Induction. 假设 $(q, w, S) \vdash^{*} (q, y_{i}, \alpha_{i})$ ，由于 $\alph
 
 当 $i = n$ 时，$\alpha_{n} = \epsilon$ ，于是有 $(q, w, S) \vdash^{*} (q, \epsilon, \epsilon)$ ，$P$ 接受 $w$
 
-($\Rightarrow$): 需要证明：当 $P$ 进行一系列操作后，将栈顶的 variable $A$ 弹出，同时没有涉及到 $A$ 以下的栈内容（称其**净效应**为弹出 $A$），则 $A$ 可以推导出在此过程中消耗的所有输入，即
+($\Rightarrow$): 需要证明：当 $P$ 进行一系列操作后，将栈顶的 variable $A$ 弹出，同时没有涉及到 $A$ 以下的栈内容（称其*净效应*为弹出 $A$），则 $A$ 可以推导出在此过程中消耗的所有输入，即
 
 $$
 (q, x, A) \underset{P}{\vdash^{*}}(q, \epsilon, \epsilon) \Rightarrow A \underset{G}{\overset{*}{\Rightarrow}} x
@@ -313,11 +307,11 @@ $$
 
 证明将基于 $P$ 操作的步数
 
-Basis. 只有一步操作，则唯一的可能是 $A \to \epsilon \in P$ ，则根据 $\delta$ 的定义，有 $(q, \epsilon, A) \vdash (q, \epsilon, \epsilon)$ ，即 $x = \epsilon$ ，显然 $A \Rightarrow x$
+Basis. 只有一步操作，则唯一的可能是 $A \to \epsilon \in P$ ，则根据 $\delta$ 的定义，有 $(q, \epsilon, A) \vdash (q, \epsilon, \epsilon)$，即 $x = \epsilon$ ，显然 $A \Rightarrow x$
 
-Induction. 考虑 $P$ 操作了 $n$ 步，则第一步一定是用 $A$ 的某个产生式体替换了栈顶的 $A$ ，假设用来替换的产生式是 $A \to Y_{1}Y_{2}\dots Y_{k}$
+Induction. 考虑 $P$ 操作了 $n$ 步，则第一步一定是用 $A$ 的某个产生式体替换了栈顶的 $A$，假设用来替换的产生式是 $A \to Y_{1}Y_{2}\dots Y_{k}$
 
-则接下来的 $n-1$ 步一定是从输入中消耗了 $x$ ，并且其净效应为逐个弹出 $Y_{1}, Y_{2} \dots$ ，则可以将 $x$ 分为 $x_{1}x_{2}\dots x_{k}$ ，其中 $x_{i}$ 代表了从弹出 $Y_{i-1}$ 到弹出 $Y_{i}$ 之间消耗的输入（即栈顶从 $Y_{i}$ 变为 $Y_{i+1}$） ，则对于所有 $i$ 有
+则接下来的 $n-1$ 步一定是从输入中消耗了 $x$ ，并且其净效应为逐个弹出 $Y_{1}, Y_{2} \dots$，则可以将 $x$ 分为 $x_{1}x_{2}\dots x_{k}$，其中 $x_{i}$ 代表了从弹出 $Y_{i-1}$ 到弹出 $Y_{i}$ 之间消耗的输入（即栈顶从 $Y_{i}$ 变为 $Y_{i+1}$），则对于所有 $i$ 有
 
 $$
 (q, x_{i}x_{i+1}\dots x_{k}, Y_{i}) \vdash^{*} (q, x_{i+1}\dots x_{k}, \epsilon)
@@ -363,7 +357,7 @@ $$
 
 * 对所有状态 $p$ ，$G$ 中有产生式 $S \to [q_{0}Z_{0}p]$ ，即 $[q_{0}Z_{0}p]$ 产生的 string $w$ 可以将 $Z_{0}$ 从栈中弹出，同时状态转移到 $p$ ，即 $(q_{0}, w, Z_{0}) \vdash^{*} (p, \epsilon, \epsilon)$ 。即 $S$ 将产生所有能让 PDA 清空其栈的 string
 
-* 若 $(r, Y_{1}Y_{2} \dots Y_{k}) \in \delta(q, a, X)$ ，其中 $a \in \Sigma \text { or } a = \epsilon, k = 0, 1, \dots$ ，则对于任意状态 $r_{1}, r_{2}, \dots r_{k}$ ，有产生式
+* 若 $(r, Y_{1}Y_{2} \dots Y_{k}) \in \delta(q, a, X)$，其中 $a \in \Sigma \text { or } a = \epsilon, k = 0, 1, \dots$ ，则对于任意状态 $r_{1}, r_{2}, \dots r_{k}$ ，有产生式
 
   $$
   [qXr_{k}] \to a[rY_{1}r_{1}][r_{1}Y_{2}r_{2}]\dots [r_{k-1}Y_{k}r_{k}]
@@ -452,14 +446,10 @@ $$
 
 PDA 默认即是 Nondeterministic 的，而实际上 deterministic 的 PDA 也有重要的作用
 
-### Definition
-
 一个 PDA $P = (Q, \Sigma, \Gamma, \delta, q_{0}, Z_{0}, F)$ 是 DPDA (Deterministic PDA) 当且仅当满足
 
 * 对于任何 $q \in Q, a \in \Sigma, a = \epsilon, X \in \Gamma$ ，$\delta(q, a, X)$ 只有一个元素
 * 若对 $a \in \Sigma$ 有 $\delta(q, a, X)$ 非空，则 $\delta(q, \epsilon, X)$ 一定是空的
-
-### Regular language and DPDA
 
 DPDA 接受的语言集合在正则语言和 CFL 之间，首先可以证明所有的正则语言都可以被 DPDA 接受
 
@@ -485,15 +475,10 @@ Prefix Property: 在一个 language 中，没有两个不同的字符串满足�
 
 则有定理：对某个 DPDA $P$ 来说如果语言 $L = N(P)$ 当且仅当 $L$ 有 prefix property 并且存在 DPDA $P^{\prime}$ 满足 $L = L(P^{\prime})$
 
-故可以看出正则语言可以由 acceptance by final state 的 DPDA 描述，但不一定能由 acceptance by empty stack 的 DPDA 描述，即对于 DPDA 来说 $L(P)$ 的描述能力是强于 $N(P)$ 的，两者并不等价，事实上，$N(P)$ 的描述能力甚至弱于正则，如 $L = \{0\}^{*}$
-
-### DPDA and Context-Free Language
-
+故可以看出正则语言可以由 acceptance by final state 的 DPDA 描述，但不一定能由 acceptance by empty stack 的 DPDA 描述，即对于 DPDA 来说 $L(P)$ 的描述能力是强于 $N(P)$ 的，两者并不等价，事实上，$N(P)$ 的描述能力甚至弱于正则，如 $L = \{0\}^{*}$
 虽然 DPDA 能接受形如 $\{wcw^{R}\}$ 这样的非正则的语言，但是也存在 CFL $L$ 满足不存在 DPDA $P$ 使得 $L = L(P)$ ，如 $\{ww^{R}\}$ ，当读完 $w$ 的时候栈已清空，没有信息用于识别后续的 $w^{R}$
 
 故对于 DPDA 来说， $L(P)$ 识别的语言集合是正则语言的超集，CFL 的子集
-
-### DPDA and Ambiguous Grammars
 
 如果对 DPDA $P$ 有 $L = N(P)$ ，那么这个语言存在一个无歧义的文法
 

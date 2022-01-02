@@ -11,17 +11,19 @@ tags: "theory"
 categories: ["course notes", "theory of computation"]
 ---
 
-## Context-Free Grammars
+# Context-Free Grammars
+
+## Context-Free Grammar
 
 ### Definition
 
 A context-free grammar $G$ is defined by the 4-tuple
 
-$G = (V, \Sigma. R, S)$ where
+$G = (V, \Sigma, R, S)$ where
 
-1. $V$ is a finite set, each element $v \in V$ is called a nonterminal character or a **variable**. Each variable defines a sub-language of the language defined by $G$
-2. $\Sigma$ is a finite set of **terminals**, disjoint from $V$. The set of terminals is the alphabet of the language defined by the grammar $G$
-3. $R$ is a finite relation from $V$ to $(V \cup \Sigma)^{*}$, where the asterisk represents the Kleene star operation. The members of $R$ are called the *(rewrite) rule*s or **productions** of the grammar.
+1. $V$ is a finite set, each element $v \in V$ is called a nonterminal character or a *variable*. Each variable defines a sub-language of the language defined by $G$
+2. $\Sigma$ is a finite set of *terminals*, disjoint from $V$. The set of terminals is the alphabet of the language defined by the grammar $G$
+3. $R$ is a finite relation from $V$ to $(V \cup \Sigma)^{*}$, where the asterisk represents the Kleene star operation. The members of $R$ are called the *(rewrite) rule*s or *productions* of the grammar.
 4. $S$ is the start variable (or start symbol), used to present the whole sentence. It must be an element of $V$
 
 A production has the form: variable (head) $\to$ strings of variables and terminals (body)
@@ -30,10 +32,13 @@ A production has the form: variable (head) $\to$ strings of variables and termin
 
 有两种应用 CFG 的产生式来推断某个特定 string 是否在某个特定 variable 定义的语言之中的方法
 
-* Body to head: 选择 body 中各个 variable 的 language 中的串，将其与 body 中的 terminals 以正确的顺序连接，其结果在 head 中的 variable 定义的语言中。称为 **recursive inference**
-* Head to body: 将开始符号用某个产生式展开，再将结果中的 variable 用其产生式展开，重复上述过程直至得到一个全部由 terminal 组成的串，所有这样的串组成了 CFG 定义的语言。这样的过程称为 **derivation**
+**recursive inference**: 选择 body 中各个 variable 的 language 中的串，将其与 body 中的 terminals 以正确的顺序连接，其结果在 head 中的 variable 定义的语言中。
 
-为了定义 derivation，定义一个新的符号 $\Rightarrow$ 。设 $G = (V, T, P, S)$ 是 CFG，令 $\alpha A \beta$ 为一个由 terminal 与 variable 组成的串，其中 $A$ 为 variable， $\alpha, \beta \in (V \cup T)^{*}$ 。令 $A \to \gamma$ 为一个产生式，则
+**derivation**: 将开始符号用某个产生式展开，再将结果中的 variable 用其产生式展开，重复上述过程直至得到一个全部由 terminal 组成的串，所有这样的串组成了 CFG 定义的语言。
+
+为了定义 derivation，定义一个新的符号 $\Rightarrow$
+
+设 $G = (V, T, P, S)$ 是 CFG，令 $\alpha A \beta$ 为一个由 terminal 与 variable 组成的串，其中 $A$ 为 variable， $\alpha, \beta \in (V \cup T)^{*}$ 。令 $A \to \gamma$ 为一个产生式，则
 
 $$
 \alpha A \beta \Rightarrow \alpha \gamma \beta
@@ -47,9 +52,9 @@ Induction. If $\alpha \overset{*}{\Rightarrow} \beta$ and $\beta \Rightarrow \ga
 
 为了限制 derivation 时的选择，引入 leftmost derivation 与 rightmost derivation
 
-* leftmost derivation: at each step we replace the **leftmost variable** by one
+* leftmost derivation: at each step we replace the *leftmost variable* by one
   of its production bodies, $\underset{\text{lm}}{\Rightarrow}$
-* rightmost derivation: at each step we replace the **rightmost variable** by one
+* rightmost derivation: at each step we replace the *rightmost variable* by one
   of its production bodies, $\underset{\text{rm}}{\Rightarrow}$
 
 ### The Language of a Grammar
@@ -88,13 +93,11 @@ BNF (Backus-Naur Form) is a notation technique for CFG
 
 Given a grammar $G = (V, T, P, S)$ , the parse trees for $G$ are trees with the following conditions
 
-* Each interior node is labeled by a **variable** in $V$
-* Each leaf is labeled by either a  **variable**, a **terminal**, or $\epsilon$ . However, if the leaf is labeled $\epsilon$ , then it must be the **only child** of its parent
+* Each interior node is labeled by a variable in $V$
+* Each leaf is labeled by either a variable, a terminal, or $\epsilon$. However, if the leaf is labeled $\epsilon$, then it must be the *only child* of its parent
 * If an interior node is labeled $A$, and its children are labeled $X_{1}, X_{2}, \dots , X_{k}$, then $A \to X_{1}X_{2}\dots X_{k}$ is a production in $P$
 
-将 parse tree 叶节点的 labels 从左向右连接起来，得到的串称为这颗树的 yield
-
-yield 是从 root variable 推导得到的。
+将 parse tree 叶节点的 labels 从左向右连接起来，得到的串称为这颗树的 yield。yield 是从 root variable 推导得到的。
 
 有一种特殊的 parse tree 满足
 
@@ -113,7 +116,7 @@ Given a grammar $G = (V, T, P, S)$ , the following are equivalent
 * $A \underset{\text{rm}}{\overset{*}{\Rightarrow}}  w$
 * There is a parse tree with root $A$ and yield $w$
 
-等价性的证明将按照下图的箭头
+等价性的证明将按照下图的顺序
 
 ![](https://i.loli.net/2020/10/26/1MbEWJyZQUX5RIL.jpg)
 
@@ -140,10 +143,9 @@ Induction. 假设经过 $n+1$ 步推断得出 $w$ 属于 $A$ 的语言。考虑�
 
 Q.E.D.
 
-
 #### From Trees to Derivations
 
-Let $G = (V, T, P, S)$ be a CFG, and suppose there is a parse tree with root labeled by variable $A$ and with yield $w$, where $w$ is in $T^{*}$ . Then there is a leftmost derivation $A \underset{\text{lm}}{\overset{*}{\Rightarrow}}  w$ in grammar $G$
+Let $G = (V, T, P, S)$ be a CFG, and suppose there is a parse tree with root labeled by variable $A$ and with yield $w$, where $w$ is in $T^{*}$. Then there is a leftmost derivation $A \underset{\text{lm}}{\overset{*}{\Rightarrow}}  w$ in grammar $G$
 
 Proof.
 
@@ -221,7 +223,7 @@ Q.E.D.
 
 对于同一个串可以得到一颗以上 parse tree 的文法就是 ambiguous 的，显然根据不同的 parse tree 可以得到不同的最左/最右推导
 
-ambiguous 是 **grammar** 而非 **language** 的属性。有些 ambiguous 的文法在修改后可以得到定义同样语言但 unambiguous 的文法
+ambiguous 是 grammar 而非 language 的属性。有些 ambiguous 的文法在修改后可以得到定义同样语言但 unambiguous 的文法
 
 LL(1) grammars are unambiguous
 
@@ -229,7 +231,7 @@ LL(1) grammars are unambiguous
 
 ### Inherent Ambiguity
 
-Certain CFLs are **inherently ambiguous**, meaning that every grammar for the language is ambiguous
+Certain CFLs are *inherently ambiguous*, meaning that every grammar for the language is ambiguous
 
 e.g. $L = \{0^{i}1^{j}2^{k}:i = j \text{ or } j = k \}$
 
@@ -237,7 +239,7 @@ e.g. $L = \{0^{i}1^{j}2^{k}:i = j \text{ or } j = k \}$
 
 ### Eliminating Useless Symbols
 
-A symbol $X$ is **useful** for a grammar $G = (V, T, P, S)$ if there is some derivation of the form $S \overset{*}{\Rightarrow} \alpha X \beta \overset{*}{\Rightarrow} w$ , where $w$ is in $T^{*}$
+A symbol $X$ is *useful* for a grammar $G = (V, T, P, S)$ if there is some derivation of the form $S \overset{*}{\Rightarrow} \alpha X \beta \overset{*}{\Rightarrow} w$ , where $w$ is in $T^{*}$
 
 从文法中删去 useless 的 symbol 并不会改变 CFG 定义的语言。一个 useful 的 symbol 具有以下两种属性
 
@@ -246,7 +248,7 @@ A symbol $X$ is **useful** for a grammar $G = (V, T, P, S)$ if there is some der
 
 先删去所有非 generating 的 symbol，再删去所有 unreachable 的 symbol 即可使其余的 symbol 均为 useful
 
-Let $G = (V, T, P, S)$ be a CFG, and assume that $L(G) \neq \varnothing$ . Let $G_{1} = (V_{1}, T_{1}, P_{1}, S)$ be the grammar we obtain by the following steps:
+Let $G = (V, T, P, S)$ be a CFG, and assume that $L(G) \neq \varnothing$. Let $G_{1} = (V_{1}, T_{1}, P_{1}, S)$ be the grammar we obtain by the following steps:
 
 1. First eliminate nongenerating symbols and all productions involving one
    or more of those symbols. Let $G_{2} = (V_{2}, T_{2}, P_{2}, S)$ be this new grammar. $S$ must be generating, since $L(G) \neq \varnothing$
@@ -273,12 +275,6 @@ $$
 
 Q.E.D.
 
-### Computing the Generating and Reachable Symbols
-
-Let $G =(V, T, P, S)$ be a grammar
-
-#### Generating
-
 找出所有的 generating symbol 是一个递归的过程
 
 Basis. 所有 $T$ 中的 symbol 都是 generating
@@ -293,11 +289,9 @@ Proof.
 
 Basis. 0 步的推导，则 $X$ 是 terminal，根据 basis，其是 generating
 
-Induction. 考虑推导 $n$ 步的情况，则 $X$ 是 variable，有 $X \Rightarrow \alpha \overset{*}{\Rightarrow} w$ ，其中 $\alpha$ 的每个 symbol 都经过少于 $n$ 步推导出 $w$ 的一部分，根据 I.H. ，$\alpha$ 中所有的 symbol 都是 generating，则根据算法的 induction 部分，$X$ 也是 generating
+Induction. 考虑推导 $n$ 步的情况，则 $X$ 是 variable，有 $X \Rightarrow \alpha \overset{*}{\Rightarrow} w$ ，其中 $\alpha$ 的每个 symbol 都经过少于 $n$ 步推导出 $w$ 的一部分，根据 I.H. $\alpha$ 中所有的 symbol 都是 generating，则根据算法的 induction 部分，$X$ 也是 generating
 
 Q.E.D.
-
-#### Reachable
 
 找出 reachable symbol 的过程同样是一个递归的过程
 
