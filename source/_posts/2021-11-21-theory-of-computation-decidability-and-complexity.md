@@ -95,14 +95,12 @@ Q.E.D.
 停机问题的定义是语言
 
 $$
-\text{HALT} = \{<M, x> : \text{TM } M \text{ halts on input }x \}
+\mathrm{HALT} = \{<M, x> : \text{TM } M \text{ halts on input }x \}
 $$
 
 其中 $<M, x>$ 是 TM $M$ 和 $x$ 的字符串形式
 
-显然这个语言是 RE，模拟 $M$ 对于 $x$ 为输入的运行即可，现在需要证明 HALT 是否是 decidable，即是否存在一个 algorithm 接受 HALT
-
-HALT 不是 decidable 的
+显然这个语言是 RE，模拟 $M$ 对于 $x$ 为输入的运行即可，现在需要证明 HALT 是否是 decidable，即是否存在一个 algorithm 接受 HALT。结论是 HALT 不是 decidable 的
 
 Proof.
 
@@ -122,7 +120,7 @@ Q.E.D.
 
 #### RE and co-RE
 
-一个 RE 的补是叫做 co-RE，而所有 co-RE 的集合组成了 co-RE 语言（注意 co-RE 不是非 RE）
+一个 RE 的补叫做 co-RE，而所有 co-RE 的集合组成了 co-RE 语言（注意 co-RE 不是非 RE）
 
 则有结论：一个语言 $L$ 是 decidable $\iff$ $L$ 是 RE 且 $L$ 是 co-RE
 
@@ -150,13 +148,13 @@ $$
 P_{1} \leqslant P_{2}
 $$
 
-归约可以说明 $P_{2}$ 至少和 $P_{1}$ **一样难**，因为如果存在一个可以解决 $P_{2}$ 的 oracle，可以通过归约解决 $P_{1}$ ，但反之不成立
+归约可以说明 $P_{2}$ 至少和 $P_{1}$ *一样难*，因为如果存在一个可以解决 $P_{2}$ 的 oracle，可以通过归约解决 $P_{1}$ ，但反之不成立
 
 归约不要求一定是满射和单射，事实上一般 $P_{1}$ 映射过去后的集合只是 $P_{2}$ 的一个子集。
 
 更为正式的定义如下：
 
-Many-one reduction: 考虑 $A, B$ 是 alphabet $\Sigma, \Gamma$ 上的形式语言，则从 $A$ 到 $B$ 的一个 **Many-one reduction** 是一个可计算的函数 $f: \Sigma^{*} \to \Gamma^{*}$ 满足
+Many-one reduction: 考虑 $A, B$ 是 alphabet $\Sigma, \Gamma$ 上的形式语言，则从 $A$ 到 $B$ 的一个 Many-one reduction 是一个 可计算的函数 $f: \Sigma^{*} \to \Gamma^{*}$ 满足
 
 $$
 \forall w , w \in A \iff f(w) \in B
@@ -197,30 +195,30 @@ Q.E.D.
 * 使用 $M_{B}$ 判定 $A$ （即构造从 $A$ 到 $B$ 的 reduction $f$，对于任意 $w$ ，使用 $M_{B}$ 判定 $f(w)$ ）
 * 这样得出 $A$ 是 decidable，导出矛盾，根据归谬法，$B$ 是 undecidable
 
-#### $A_{TM}$ is undecidable
+#### $A_{\mathrm{TM}}$ is undecidable
 
-$A_{TM}$ 的定义为
+$A_{\mathrm{TM}}$ 的定义为
 
 $$
-A_{TM} = \{<M, w>: w \in L(M)\}
+A_{\mathrm{TM}} = \{<M, w>: w \in L(M)\}
 $$
 
-而根据上文结论，已知 HALT 是 undecidable 的，那么通过 reduction 可以证明 $A_{TM}$ 是 undecidable
+而根据上文结论，已知 HALT 是 undecidable 的，那么通过 reduction 可以证明 $A_{\mathrm{TM}}$ 是 undecidable
 
 Proof.
 
-将 HALT 归约到 $A_{TM}$
+将 HALT 归约到 $A_{\mathrm{TM}}$
 
-如果 $A_{TM}$ 可判定，可以通过 $A_{TM}$ 判定 HALT，从而导出矛盾
+如果 $A_{\mathrm{TM}}$ 可判定，可以通过 $A_{\mathrm{TM}}$ 判定 HALT，从而导出矛盾
 
-对于 HALT 的实例 $<M, w>$ ，可以构造一个 TM $H$ ，对于输入 $<M, w>$ 判断 $<M, w>$ 是否属于 $A_{TM}$
+对于 HALT 的实例 $<M, w>$ ，可以构造一个 TM $H$ ，对于输入 $<M, w>$ 判断 $<M, w>$ 是否属于 $A_{\mathrm{TM}}$
 
 * 如果属于，则说明 $M$ halt 并接收 $w$，$H$ accept
 * 如果不属于，则说明 $M$ 或是 halt 并 reject $w$ ，或是在 $w$ 上无限循环
   * 构造 $M^{\prime}$ ，模拟 $M$ 的运行，且当 $M$ halt 时，若 $M$ 结果为 accept 则 $M^{\prime}$ reject，反之若 $M$ 结果为 reject 则 $M^{\prime}$ accept，若 $M$ 无限循环则 $M^{\prime}$ 同样会无限循环
-  * 判断 $<M^{\prime}, w>$ 是否属于 $A_{TM}$ ，如果属于则说明 $M$ 在 $w$ 上 halt 并 reject，则 $H$ accept，否则说明无论 $M, M^{\prime}$ 在 $w$ 上都循环，$H$ reject
+  * 判断 $<M^{\prime}, w>$ 是否属于 $A_{\mathrm{TM}}$ ，如果属于则说明 $M$ 在 $w$ 上 halt 并 reject，则 $H$ accept，否则说明无论 $M, M^{\prime}$ 在 $w$ 上都循环，$H$ reject
 
-由于 $A_{TM}$ 可判定，故 $H$ 最终总会 halt，且有 $HALT = L(H)$ ，而 HALT 为 undecidable，矛盾。
+由于 $A_{\mathrm{TM}}$ 可判定，故 $H$ 最终总会 halt，且有 $HALT = L(H)$ ，而 HALT 为 undecidable，矛盾。
 
 Q.E.D.
 
@@ -228,41 +226,41 @@ Q.E.D.
 
 Proof.
 
-如果 $A_{TM}$ decidable，假设其 decider 为 $H$ ，则构造 TM $D$ 接受 $<M>$ 输入
+如果 $A_{\mathrm{TM}}$ decidable，假设其 decider 为 $H$ ，则构造 TM $D$ 接受 $<M>$ 输入
 
-* 如果 $<M,<M>> \in A_{TM}$ 则 $D$ reject
-* 如果 $<M, <M>> \notin A_{TM}$ 则 $D$ accept
+* 如果 $<M,<M>> \in A_{\mathrm{TM}}$ 则 $D$ reject
+* 如果 $<M, <M>> \notin A_{\mathrm{TM}}$ 则 $D$ accept
 
-则考虑 $D$ 以 $<D>$ 为输入，如果 accept，说明 $<D, <D>> \notin A_{TM}$ ，即 $<D> \notin D$ ，导出矛盾。反之亦然，故根据归谬法，不存在 $D$ 和 $H$，亦即 $A_{TM}$ 为 undecidable
+则考虑 $D$ 以 $<D>$ 为输入，如果 accept，说明 $<D, <D>> \notin A_{\mathrm{TM}}$ ，即 $<D> \notin D$ ，导出矛盾。反之亦然，故根据归谬法，不存在 $D$ 和 $H$，亦即 $A_{\mathrm{TM}}$ 为 undecidable
 
 Q.E.D.
 
-#### $E_{TM}$ is undecidable
+#### $E_{\mathrm{TM}}$ is undecidable
 
-$E_{TM}$ 的定义为
+$E_{\mathrm{TM}}$ 的定义为
 
 $$
-E_{TM} = \{<M>:L(M) = \varnothing \}
+E_{\mathrm{TM}} = \{<M>:L(M) = \varnothing \}
 $$
 
-$E_{TM}$ 是 undecidable 的
+$E_{\mathrm{TM}}$ 是 undecidable 的
 
 Proof.
 
-将 $A_{TM}$ 归约到 $E_{TM}$
+将 $A_{\mathrm{TM}}$ 归约到 $E_{\mathrm{TM}}$
 
-对于 $A_{TM}$ 的实例 $<M, w>$ ，可以构造一个 TM $M^{\prime}$ ，$M^{\prime}$ 模拟 $M$ 在 $w$ 为输入时的运行
+对于 $A_{\mathrm{TM}}$ 的实例 $<M, w>$ ，可以构造一个 TM $M^{\prime}$ ，$M^{\prime}$ 模拟 $M$ 在 $w$ 为输入时的运行
 
 * 如果 $M$ accept $w$ ，则 $M^{\prime}$ accept 其输入 $x$
 * 否则 $M^{\prime}$ reject 其输入 $x$
 
-如此构造后 $<M, w> \in A_{TM} \iff L(M^{\prime}) \neq \varnothing \iff <M^{\prime}> \notin E_{TM}$
+如此构造后 $<M, w> \in A_{\mathrm{TM}} \iff L(M^{\prime}) \neq \varnothing \iff <M^{\prime}> \notin E_{\mathrm{TM}}$
 
-如果 $E_{TM}$ decidable 则 $A_{TM}$ 也 decidable，导出矛盾，故 $E_{TM}$ undecidable
+如果 $E_{\mathrm{TM}}$ decidable 则 $A_{\mathrm{TM}}$ 也 decidable，导出矛盾，故 $E_{\mathrm{TM}}$ undecidable
 
 Q.E.D.
 
-事实上 $E_{TM}$ 是 non-RE 的，因为其补是 RE（构造 NTM 猜测一个输入 $x$ 判断其是否属于 $L(M)$ ，只要 $L(M)$ 非空则一定能猜到一个 $x$ 并接受 $<M>$），而如果 $E_{TM}$ 也是 RE 则 $E_{TM}$ 为 decidable
+事实上 $E_{\mathrm{TM}}$ 是 non-RE 的，因为其补是 RE（构造 NTM 猜测一个输入 $x$ 判断其是否属于 $L(M)$ ，只要 $L(M)$ 非空则一定能猜到一个 $x$ 并接受 $<M>$），而如果 $E_{\mathrm{TM}}$ 也是 RE 则 $E_{\mathrm{TM}}$ 为 decidable
 
 ### Rice's Theorem
 
@@ -287,20 +285,20 @@ $$
 \end{gathered}
 $$
 
-要注意 Rice's Theorem 的适用范围仅限 **non-trivial semantic properties**
+要注意 Rice's Theorem 的适用范围仅限 *non-trivial semantic properties*
 
 $P$ is non-trivial $\iff$ $P$ is undecidable
 
 Proof.
 
-将 $A_{TM}$ 归约到 $P$
+将 $A_{\mathrm{TM}}$ 归约到 $P$
 
-思路为如果 $P$ non-trivial 则一定存在 $<M_{L}> \in P$ ，对于 $A_{TM}$ 的实例 $<M, w>$ ，构造 TM $M^{\prime}$ ，模拟 $M$ 在 $w$ 上的运行，如果 accept，则模拟 $M_{L}$ 在输入 $x$ 上的运行，如果 accept 则 accept，这样 $<M, w> \in A_{TM} \iff L(M^{\prime}) = L(M_{L}) \iff <M^{\prime}> \in P$
+思路为如果 $P$ non-trivial 则一定存在 $<M_{L}> \in P$ ，对于 $A_{\mathrm{TM}}$ 的实例 $<M, w>$ ，构造 TM $M^{\prime}$ ，模拟 $M$ 在 $w$ 上的运行，如果 accept，则模拟 $M_{L}$ 在输入 $x$ 上的运行，如果 accept 则 accept，这样 $<M, w> \in A_{\mathrm{TM}} \iff L(M^{\prime}) = L(M_{L}) \iff <M^{\prime}> \in P$
 
 $P$ 如果 trivial 则证明过程可以推出矛盾，e.g. $P$ 包含所有 TM，则
 
 $$
-<M, w>\notin A_{TM} \iff L(M^{\prime}) = \varnothing \iff M^{\prime} \in P
+<M, w>\notin A_{\mathrm{TM}} \iff L(M^{\prime}) = \varnothing \iff M^{\prime} \in P
 $$
 
 Q.E.D.
@@ -339,20 +337,20 @@ Intractable Problems: problems that cannot to be solvable in **polynomial** time
 根据 time complexity 即可定义 time complexity class
 
 $$
-\mathrm{TEXT}(t(n)) = \{L:\text{there exists a TM }M \text{ that decides } L \text{ in time } O(t(n)) \}
+\mathrm{TIME}(t(n)) = \{L:\text{there exists a TM }M \text{ that decides } L \text{ in time } O(t(n)) \}
 $$
 
 这里的 TM 指的是 single-tape TM，而对于 multi-tape TM 来说，对于任意 $t(n) \geqslant n$ ，任何 $t(n)$ 的 multi-tape TM 都有一个等价的 $O(t(n)^{2})$  的 single-tape TM
 
 ### $\mathcal{P} \text{ and } \mathcal{NP}$
 
-$\mathcal{P}$ 是所有能在**确定性**单带 TM 上以**多项式时间**判定的语言的集合
+$\mathcal{P}$ 是所有能在*确定性*单带 TM 上以*多项式时间*判定的语言的集合
 
 $$
 \mathcal{P} = \bigcup_{k \geqslant 1}\mathrm{TIME}(n^{k})
 $$
 
-$\mathcal{NP}$ 是所有能在**非确定性**单带 TM 上以**多项式时间**判定的语言的集合
+$\mathcal{NP}$ 是所有能在*非确定性*单带 TM 上以*多项式时间*判定的语言的集合
 
 如果定义
 
@@ -378,7 +376,7 @@ Proof.
 
 $\Leftarrow$ 可以构造一个 NTM 判定 $L$，首先用 $|x|^{k}$ 步去猜测一个 $y$ ，然后用 $R$ 判定 $<x, y>$
 
-$\Rightarrow$ 假设 $L$ 被一个 $n^{k}$ 的 NTM $M$ 判定，则定义 $R$ 是所有满足“$y$ 是 $M$ 接受 $x$ 的一个 accepting computation history” 的 $<x, y>$ ，则如果 $M$ accept $x$ ，一定存在一个满足条件的 $y$ ，且 $|y| \leqslant |x|^{k}$ （因为 $M$ 是一个 $n^{k}$ 的 NTM），且 $<x, y> \in R$
+$\Rightarrow$ 假设 $L$ 被一个 $n^{k}$ 的 NTM $M$ 判定，则定义 $R$ 是所有满足“$y$ 是 $M$ 接受 $x$ 的一个 accepting computation history” 的 $<x, y>$，则如果 $M$ accept $x$，一定存在一个满足条件的 $y$，且 $|y| \leqslant |x|^{k}$（因为 $M$ 是一个 $n^{k}$ 的 NTM），且 $<x, y> \in R$
 
 Q.E.D.
 
@@ -387,7 +385,7 @@ $y$ 被称为 certificate，即对于一个 $\mathcal{NP}$ 问题来说，验证
 E.g. 最大团问题被定义为
 
 $$
-CLIQUE = \{<G, k>\}
+\mathrm{CLIQUE} = \{<G, k>\}
 $$
 
 满足图 $G$ 中存在大小为 $k$ 的团，这是一个 $\mathcal{NP}$ 问题，但是
@@ -396,9 +394,9 @@ $$
 R = \{<<G, k>, S>\}
 $$
 
-满足 $S$ 是 $G$ 中顶点的一个子集且 $S$ 是大小为 $k$ 的团，这是一个 $\mathcal{P}$ 问题，其中 $S$ 就扮演了 certificate 的角色
+满足 $S$ 是 $G$ 中顶点的一个子集且 $S$ 是大小为 $k$ 的团，这是一个 $\mathcal{P}$ 问题，其中 $S$ 就扮演了 certificate 的角色
 
-$\mathcal{NP}$ 不是一个有实践意义的计算模型，因为现实生活中的计算不是非确定性的，但是 $\mathcal{NP}$ 中语言的性质说明了这类问题的一个特征，即可以找到问题的一个实例并且可以有效地测试其是否是一个满足要求的解
+$\mathcal{NP}$ 不是一个有实践意义的计算模型，因为现实生活中的计算不是非确定性的，但是 $\mathcal{NP}$ 中语言的性质说明了这类问题的一个特征，即可以找到问题的一个实例并且可以有效地测试其是否是一个满足要求的解
 
 如果定义
 
@@ -422,15 +420,15 @@ $$
 A \leqslant_{p}B
 $$
 
-poly-time computable: 对于函数 $f$，对于 $g(n) = n^{O(1)}$，存在一个 $g(n)$ TM $M_{f}$ 满足对任意输入 $w$，$M_{f}$ 都会 halt 且在 tape 上留下 $f(w)$
+poly-time computable: 对于函数 $f$，对于 $g(n) = n^{O(1)}$，存在一个 $g(n)$ TM $M_{f}$ 满足对任意输入 $w$，$M_{f}$ 都会 halt 且在 tape 上留下 $f(w)$
 
-同样的，这个 reduction 隐含的意义为 $B$ 至少和 $A$ 一样难
+同样的，这个 reduction 隐含的意义为 $B$ 至少和 $A$ 一样难
 
-则有，如果 $A \leqslant_{p} B, B \in \mathcal{P}$，则 $A \in \mathcal{P}$ 
+则有，如果 $A \leqslant_{p} B, B \in \mathcal{P}$，则 $A \in \mathcal{P}$
 
 Proof.
 
-可以在 poly-time 将 $A$ 的实例 $w$ 转换为 $B$ 的实例 $f(w)$，且可以在 poly-time 使用 $B$ 的 decider 判定 $f(w)$ （由于 poly-time reduction，$|f(w)| \leqslant |w|^{k}$），由于多项式运算的封闭性，总体的时间仍是 poly-time 的
+可以在 poly-time 将 $A$ 的实例 $w$ 转换为 $B$ 的实例 $f(w)$，且可以在 poly-time 使用 $B$ 的 decider 判定 $f(w)$（由于 poly-time reduction，$|f(w)| \leqslant |w|^{k}$），由于多项式运算的封闭性，总体的时间仍是 poly-time 的
 
 Q.E.D.
 
@@ -441,46 +439,42 @@ Q.E.D.
 * $L \in \mathcal{NP}$
 * $\forall L^{\prime} \in \mathcal{NP}, L^{\prime} \leqslant_{p} L$
 
-如果仅满足第二条约束则称 $L$ 是 $\mathcal{NP}$-hard
+如果仅满足第二条约束则称 $L$是 $\mathcal{NP}$-hard
 
-证明一个语言 $L$ 属于 $\mathcal{NPC}$ 可以分为两步
+证明一个语言 $L$ 属于 $\mathcal{NPC}$ 可以分为两步
 
 1. 证明 $L \in \mathcal{NP}$
-2. 对于已知的 $M \in \mathcal{NPC}$ ，有 $M \leqslant_{p} L$ （根据 poly-time reduction 的传递性可得其满足第二条约束）
+2. 对于已知的 $M \in \mathcal{NPC}$，有 $M \leqslant_{p} L$（根据 poly-time reduction 的传递性可得其满足第二条约束）
 
 对于 $\mathcal{NPC}$ 有如下结论
 
-如果 $B \in \mathcal{NPC}$ 且 $B \in \mathcal{P}$ ，则 $\mathcal{P} = \mathcal{NP}$
+如果 $B \in \mathcal{NPC}$ 且 $B \in \mathcal{P}$，则 $\mathcal{P} = \mathcal{NP}$
 
 Proof.
 
-任取 $L \in \mathcal{NP}$ ，有 $L \leqslant_{p} B$ ，而由于之前的结论，$B \in \mathcal{P}, L \in \mathcal{P}$ ，则 $\mathcal{P} = \mathcal{NP}$
+任取 $L \in \mathcal{NP}$，有 $L \leqslant_{p} B$，而由于之前的结论，$B \in \mathcal{P}, L \in \mathcal{P}$，则 $\mathcal{P} = \mathcal{NP}$
 
 Q.E.D.
 
-#### SAT problem
-
-SAT 指的是一个布尔表达式是否为 satisfiable 的问题，这个问题是一个 $\mathcal{NPC}$ 问题
+SAT 指的是一个布尔表达式是否为 satisfiable 的问题，这个问题是一个 $\mathcal{NPC}$ 问题
 
 一个布尔表达式是 satisfiable 的，说明存在一个对其中 variable 的 assignment 使得整个表达式为真
 
 其证明的思路分为两部分
 
 * SAT 是 $\mathcal{NP}$ 问题：只需要构造一个 NTM 猜测并验证 assignment
-* $\forall A \in \mathcal{NP}, A \leqslant_{p} SAT$ ：令 $M$ 为判定 $A$ 的 $n^{k}$ NTM，则对于输入 $w$ ，可以构造一个布尔表达式 $\varphi_{M, w}$ ，满足 $\varphi_{M, w} \text{ is satisfiable } \iff w \in L(M) $，具体构造过程见课本 10.2.3 节
+* $\forall A \in \mathcal{NP}, A \leqslant_{p} SAT$：令 $M$ 为判定 $A$ 的 $n^{k}$NTM，则对于输入 $w$，可以构造一个布尔表达式 $\varphi_{M, w}$，满足 $\varphi_{M, w} \text{ is satisfiable } \iff w \in L(M)$，具体构造过程见课本 10.2.3 节
 
 3SAT 是 SAT 问题的一个特例，即一个 3-cnf 的布尔表达式是否为 satisfiable
 
 3SAT 也是 $\mathcal{NPC}$ 问题
 
-#### More $\mathcal{NPC}$ problems
-
 图中的最大独立集（independent set, IS）：独立集 $I$ 是一个点集，满足其中任意两点都没有边相连
 
-图中的最大团（clique）：团 $S$ 是一个点集满足其中任意两点都有边相连
+图中的最大团（clique）：团 $S$ 是一个点集满足其中任意两点都有边相连
 
-图中的最小顶点覆盖（vertex cover, VC）：覆盖集 $C$ 是一个点集，满足对任意边 $e$，其至少有一个顶点在 $C$ 中
+图中的最小顶点覆盖（vertex cover, VC）：覆盖集 $C$ 是一个点集，满足对任意边 $e$，其至少有一个顶点在 $C$ 中
 
 图中的 Hamilton 回路：存在一个环经过每个顶点且仅经过一次，类似的问题还有 TSP 问题
 
-子集和问题（subset sum）：对于一个集合 $N$ 存在一个子集 $S$ 满足 $S$ 中的数的和等于给定值 $k$
+子集和问题（subset sum）：对于一个集合 $N$ 存在一个子集 $S$ 满足 $S$ 中的数的和等于给定值 $k$
