@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸 安装 Hexo 与搭建博客 Hexo 是一个简洁高效的博客框架，可以快速生成静态网页 安装 Hexo 需要先安装  node.js Git  安装后需要确保 PATH 中有可执行程序路径，可以通过下述命令检查 123$ npm -v$ node -v$ git --version 之后便可以通">
+    <meta name="description" content="使用 Hexo 与 GitHub pages 搭建静态博客 搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸 安装 Hexo 与搭建博客 Hexo 是一个简洁高效的博客框架，可以快速生成静态网页 安装 Hexo 需要先安装  node.js Git  安装后需要确保 PATH 中有可执行程序路径，可以通过下述命令检查 123$ npm -v$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 Hexo 与 GitHub pages 快速搭建博客">
 <meta property="og:url" content="http://i1123581321.github.io/2020/10/14/use-hexo-to-build-a-blog/">
 <meta property="og:site_name" content="Nautilus">
-<meta property="og:description" content="搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸 安装 Hexo 与搭建博客 Hexo 是一个简洁高效的博客框架，可以快速生成静态网页 安装 Hexo 需要先安装  node.js Git  安装后需要确保 PATH 中有可执行程序路径，可以通过下述命令检查 123$ npm -v$ node -v$ git --version 之后便可以通">
+<meta property="og:description" content="使用 Hexo 与 GitHub pages 搭建静态博客 搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸 安装 Hexo 与搭建博客 Hexo 是一个简洁高效的博客框架，可以快速生成静态网页 安装 Hexo 需要先安装  node.js Git  安装后需要确保 PATH 中有可执行程序路径，可以通过下述命令检查 123$ npm -v$">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-14T14:29:42.000Z">
-<meta property="article:modified_time" content="2021-11-20T09:32:02.982Z">
+<meta property="article:modified_time" content="2022-01-02T06:59:38.738Z">
 <meta property="article:author" content="Zhengxuan Qian">
 <meta property="article:tag" content="hexo">
 <meta property="article:tag" content="github">
@@ -230,7 +230,7 @@ mjx-container[display="true"] + br {
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E4%B8%8E%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.</span> <span class="toc-text">安装 Hexo 与搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%87%B3-github-pages"><span class="toc-number">2.</span> <span class="toc-text">部署至 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="toc-number">3.</span> <span class="toc-text">持续集成</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-hexo-%E4%B8%8E-github-pages-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.</span> <span class="toc-text">使用 Hexo 与 GitHub pages 搭建静态博客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E4%B8%8E%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Hexo 与搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%87%B3-github-pages"><span class="toc-number">1.2.</span> <span class="toc-text">部署至 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="toc-number">1.3.</span> <span class="toc-text">持续集成</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -279,7 +279,8 @@ mjx-container[display="true"] + br {
   
 
   <div class="content" itemprop="articleBody">
-    <p>搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸</p>
+    <h1 id="使用-hexo-与-github-pages-搭建静态博客">使用 Hexo 与 GitHub pages 搭建静态博客</h1>
+<p>搭建博客以后的第一篇文章就是如何搭建博客，好比垃圾袋拆开以后第一个垃圾就是它的包装纸</p>
 <h2 id="安装-hexo-与搭建博客">安装 Hexo 与搭建博客</h2>
 <p>Hexo 是一个简洁高效的博客框架，可以快速生成静态网页</p>
 <p>安装 Hexo 需要先安装</p>
@@ -388,7 +389,7 @@ mjx-container[display="true"] + br {
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E4%B8%8E%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.</span> <span class="toc-text">安装 Hexo 与搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%87%B3-github-pages"><span class="toc-number">2.</span> <span class="toc-text">部署至 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="toc-number">3.</span> <span class="toc-text">持续集成</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-hexo-%E4%B8%8E-github-pages-%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.</span> <span class="toc-text">使用 Hexo 与 GitHub pages 搭建静态博客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-hexo-%E4%B8%8E%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.1.</span> <span class="toc-text">安装 Hexo 与搭建博客</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E8%87%B3-github-pages"><span class="toc-number">1.2.</span> <span class="toc-text">部署至 Github Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="toc-number">1.3.</span> <span class="toc-text">持续集成</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -424,7 +425,7 @@ mjx-container[display="true"] + br {
     Copyright &copy;
     
     
-    2020-2021
+    2020-2022
     Zhengxuan Qian
   </div>
   <div class="footer-right">
