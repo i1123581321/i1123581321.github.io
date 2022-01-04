@@ -44,13 +44,13 @@ Basis. 如果 $s \to s^{\prime}$ ，则有 $s \twoheadrightarrow s^{\prime}$
 
 Induction. 如果 $s \twoheadrightarrow s^{\prime}, s^{\prime} \twoheadrightarrow s^{\prime\prime}$ ，则有 $s \twoheadrightarrow s^{\prime\prime}$
 
-根据此即可定义一个状态的**可达**（reachable）
+根据此即可定义一个状态的可达（reachable）
 
 对于 TS $A = (S, S_{0}, T, \alpha, \beta)$ ，如果对于 $s \in S, s_{0} \in S_{0}$ 有 $s_{0} \twoheadrightarrow s$ ，则称 $s$ reachable
 
 而如果对于 $s \in S$ ，不存在 $s^{\prime}$ 满足 $s \to s^{\prime}$ ，则称 $s$ 为 terminal
 
-若 $s$ 为 terminal 且 $s$ reachable，则称 $s$ 为 **deadlock state**
+若 $s$ 为 terminal 且 $s$ reachable，则称 $s$ 为 deadlock state
 
 ### Path
 
@@ -115,15 +115,13 @@ label $\lambda(t)$ 代表触发 $t$ 的动作
 
 一般来说不会有两个 transition 有相同的 source，target 以及 label，即 TS 中的 transition 都是可区分的（$T \to S \times \Sigma \times S$ 是单射），但是两个 transition 有相同的 source 和 target 是合理的
 
-在 labeled TS 中，有 path $c = t_{1}t_{2}\dots$ ，则称 $trace(c) = \lambda(t_{1}) \lambda(t_{2}) \dots$ 为 $c$ 的**迹**（trace）
+在 labeled TS 中，有 path $c = t_{1}t_{2}\dots$ ，则称 $trace(c) = \lambda(t_{1}) \lambda(t_{2}) \dots$ 为 $c$ 的迹（trace）
 
 ## Equivalency for TS
 
 等价关系是一种二元关系，满足自反，对称，传递。对于 TS 有很多种不同的等价定义方式
 
-### TS homomorphism
-
-考虑两个 TS $A = (S, S_{0}, T, \alpha, \beta)$ 与 $A^{\prime} = (S^{\prime}, S_{0}^{\prime}, T^{\prime}, \alpha^{\prime}, \beta^{\prime})$
+**Homomorphism**: 考虑两个 TS $A = (S, S_{0}, T, \alpha, \beta)$ 与 $A^{\prime} = (S^{\prime}, S_{0}^{\prime}, T^{\prime}, \alpha^{\prime}, \beta^{\prime})$
 
 从 $A$ 到 $A^{\prime}$ 的 homomorphism 是一对映射 $(h_{\sigma}, h_{\tau})$
 
@@ -151,40 +149,32 @@ $$
 
 如果 $h_{\sigma}, h_{\tau}$ 都是 surjective，则称 homomorphism $h$ 是 surjective，$A^{\prime}$ 是 $A$ 在 $h$ 下的 quotient
 
-### TS strong isomorphism
-
-一个 TS strong isomorphism 是一个 TS homomorphism，满足 $h_{\sigma}, h_{\tau}$ 都是 **bijective**
+**strong isomorphism**: 一个 TS strong isomorphism 是一个 TS homomorphism，满足 $h_{\sigma}, h_{\tau}$ 都是 *bijective*
 
 显然如果 $h$ 是 isomorphism 则 $h$ 的逆也是一个 isomorphism
 
 对于两个 strong isomorphic 的 TS，它们唯一的区别就是命名方式
 
-### TS weak isomorphism
-
-对于一个 TS $T$ ，其可达的状态集合定义为
+**weak isomorphism**: 对于一个 TS $T$ ，其可达的状态集合定义为
 
 $$
 reach(T) =\{s: s_{0} \twoheadrightarrow s\}
 $$
 
-则如果两个 TS 的 **isomorphism** 是定义在 $reach(T)$ 上的，称这两个 TS weak isomorphism，即仅在可达的部分相同
+则如果两个 TS 的 *isomorphism* 是定义在 $reach(T)$ 上的，称这两个 TS weak isomorphism，即仅在可达的部分相同
 
 显然，如果两个 TS isomorphic，则这两个 TS weak isomorphic
 
-### Bisimulation
+**Bisimulation**: 令 $T, T^{\prime}$ 为两个 TS ，则 bisimulation 是一个二元关系 $B \subseteq S \times S^{\prime}$ ，其定义为
 
-令 $T, T^{\prime}$ 为两个 TS ，则 bisimulation 是一个二元关系 $B \subseteq S \times S^{\prime}$ ，其定义为
-
-Basis.
-
-$B(s_{0}, s_{0}^{\prime})$
+Basis. $B(s_{0}, s_{0}^{\prime})$
 
 Induction.
 
-* 如果 $B(s_{1}, s_{1}^{\prime})$ 且 $s_{1} \to s_{2}$ ，则存在 $s_{2}^{\prime} \in S^{\prime}$ s. t. $s_{1}^{\prime} \to s_{2}^{\prime}$ 并且 $B(s_{2}, s_{2}^{\prime})$
-* 如果 $B(s_{1}, s_{1}^{\prime})$ 且 $s_{1}^{\prime} \to s_{2}^{\prime}$ ，则存在 $s_{2} \in S$ s. t. $s_{1} \to s_{2}$ 并且 $B(s_{2}, s_{2}^{\prime})$
+* 如果 $B(s_{1}, s_{1}^{\prime})$ 且 $s_{1} \to s_{2}$ ，则存在 $s_{2}^{\prime} \in S^{\prime}$ 满足 $s_{1}^{\prime} \to s_{2}^{\prime}$ 并且 $B(s_{2}, s_{2}^{\prime})$
+* 如果 $B(s_{1}, s_{1}^{\prime})$ 且 $s_{1}^{\prime} \to s_{2}^{\prime}$ ，则存在 $s_{2} \in S$ 满足 $s_{1} \to s_{2}$ 并且 $B(s_{2}, s_{2}^{\prime})$
 
-> 这里的 transition 需要 label 相同（或是对应）
+这里的 transition 需要 label 相同（或是对应）
 
 $T, T^{\prime}$ 是 bisimulation equivalence $\iff$ 存在 bisimulation
 
@@ -210,7 +200,7 @@ $$
 
 然而对于 product TS 来说，不是所有 transition 都是有意义的，因为要受到同步的限制
 
-故有意义的 TS 是 free product 的一个子系统，其定义可表示为 **synchronous product**
+故有意义的 TS 是 free product 的一个子系统，其定义可表示为 synchronous product
 
 如果 TS $A_{1}, A_{2}, \dots, A_{n}$ 对应的 label alphabet 为 $\Sigma_{1}, \Sigma_{2} , \dots ,\Sigma_{n}$ ，且 $I \subset \Sigma_{1} \times \Sigma_{2} \times \dots \times \Sigma_{n}$ 是一个同步限制条件，则其 synchronous product 记为
 
@@ -220,7 +210,7 @@ $$
 
 是 free product 的子系统，仅包含满足 $\lambda(t) \in I$ 的 transition $t$
 
-在 free product 中，假设所有的 TS 都是同步执行的，但是有时候也需要体现出某个 TS 执行而其他 TS 没有执行的情况，故可以引入 $\tau$-transition，即从任意状态 $s$ **到其自身**的 transition
+在 free product 中，假设所有的 TS 都是同步执行的，但是有时候也需要体现出某个 TS 执行而其他 TS 没有执行的情况，故可以引入 $\tau$-transition，即从任意状态 $s$ *到其自身*的 transition
 
 在不同 TS 间有 shared label 的情况下 $\tau$-transition 十分重要
 
@@ -242,10 +232,10 @@ CTL\* 的组成包括
 
 一个例子如下
 
-![2019-12-17_10-29-51.png](https://i.loli.net/2019/12/17/JAkb2PtuR3zrLTf.png)
+![](https://i.loli.net/2019/12/17/JAkb2PtuR3zrLTf.png)
 
 常见的用 CFL 描述的行为有
 
 * Safety: something bad will not happen，常用 AG 描述
 * Liveness: something good will happen，常用 AF 描述
-* Fairness: something is successful/allocated **infinitely often**，常用 AGAF 描述，即对于所有路径上的所有状态，都满足在之后的所有路径上都会在某个状态上满足条件
+* Fairness: something is successful/allocated *infinitely often*，常用 AGAF 描述，即对于所有路径上的所有状态，都满足在之后的所有路径上都会在某个状态上满足条件

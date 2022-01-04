@@ -51,9 +51,9 @@ PN 是一个 4-tuple $C = (P, T, I, O)$ 其中
 
 #### Fire
 
-对于一个 transition $t$ ，$t$ 在当前 marking 为 **enabled** $\iff$ 对于 $t$ 的所有 input，其中都存在一个 token
+对于一个 transition $t$ ，$t$ 在当前 marking 为 enabled $\iff$ 对于 $t$ 的所有 input，其中都存在一个 token
 
-一个 enabled transition 即可 **fire** ，即从其所有 input 中减去一个 token，再在其所有 output 中增加一个 token
+一个 enabled transition 即可 fire ，即从其所有 input 中减去一个 token，再在其所有 output 中增加一个 token
 
 Fire 是一个原子操作
 
@@ -75,7 +75,7 @@ $$
 \mu_{0} \overset{t_{0}}{\to} \mu_{1} \overset{t_{1}}{\to} \dots \overset{t_{n-1}}{\to} \mu_{n} \overset{t_{n}}{\to} \dots
 $$
 
-其中 $\mu_{0}$ 是 PN 的初始 marking，而 $t_{i} \in enabled(\mu_{i})$ ，且
+其中 $\mu_{0}$ 是 PN 的初始 marking，而 $t_{i} \in \mathrm{enabled}(\mu_{i})$ ，且
 
 $$
 \mu_{i} = (\mu_{i-1} - \cdot t_{i-1}) + t_{i-1}\cdot, \forall i \geqslant 1
@@ -107,17 +107,17 @@ PN 的语义同样是基于 TS，其中状态为 marking，而 transition 即为
 
 如下图
 
-![2019-12-14_15-26-39.png](https://i.loli.net/2019/12/14/16exKR72XQuBhDj.png)
+![](https://i.loli.net/2019/12/14/16exKR72XQuBhDj.png)
 
 新添加的 $p^{\prime}$ 满足了在 $p, p^{\prime}$ 中的 token 数之和恒定且等于 $K(p)$ ，但是对于有 self-loop 的便不能使用这种方法，如下图
 
-![2019-12-14_15-26-48.png](https://i.loli.net/2019/12/14/ZeaHAKGqcByiSTo.png)
+![](https://i.loli.net/2019/12/14/ZeaHAKGqcByiSTo.png)
 
 在添加后变为了不能 fire 的状态
 
 但是对于 non-pure 的 PN 可以通过消除 self-loop 的方式将其变为等价的 pure PN
 
-![2019-12-14_15-30-50.png](https://i.loli.net/2019/12/14/sGr7DtpaXbhiy21.png)
+![](https://i.loli.net/2019/12/14/sGr7DtpaXbhiy21.png)
 
 #### Behavioral properties
 
@@ -144,11 +144,11 @@ Behavioral peoperty 是取决于初始 marking 的属性
 
 在分析 PN 时代价往往是随着 PN 规模的增大指数级增长的，故需要化简 PN，常用的方法有
 
-![2019-12-14_20-23-05.png](https://i.loli.net/2019/12/14/sUHgLt2wvXjizuE.png)
+![](https://i.loli.net/2019/12/14/sUHgLt2wvXjizuE.png)
 
-![2019-12-14_20-22-51.png](https://i.loli.net/2019/12/14/j1m6nFqdegypkVS.png)
+![](https://i.loli.net/2019/12/14/j1m6nFqdegypkVS.png)
 
-![2019-12-14_20-23-14.png](https://i.loli.net/2019/12/14/29NcIkOX8vCK31V.png)
+![](https://i.loli.net/2019/12/14/29NcIkOX8vCK31V.png)
 
 ### PN with time
 
@@ -170,25 +170,25 @@ time PN 是一个 6-tuple $N = (P, T, F, Eft, Lft, \mu_{0})$ ，其中
 * $Eft, Lft: T \to \mathbb{N}$ 是 earliest fire time 和 latest fire time，满足 $\forall t \in T, Eft(t) \leqslant Lft(t) \leqslant \infty$
 * $\mu_{0}$ 是初始 marking
 
-令 $T$ 为非负实数（代表时间），则 $N$ 中的状态是一个 pair $(\mu, c)$ ，其中 $\mu$ 是 marking，且 $c:enabled(\mu) \to T$ 被称为 clock function
+令 $T$ 为非负实数（代表时间），则 $N$ 中的状态是一个 pair $(\mu, c)$ ，其中 $\mu$ 是 marking，且 $c:\mathrm{enabled}(\mu) \to T$ 被称为 clock function
 
 对于初始状态 $(\mu_{0}, c_{0})$ 满足
 
 $$
-\forall t \in enabled(\mu_{0}), c_{0}(t) = 0
+\forall t \in \mathrm{enabled}(\mu_{0}), c_{0}(t) = 0
 $$
 
 则一个 transition $t$ 如果能在状态 $(\mu, c)$ 以 $\delta$ 的延迟 fire 等价于满足下列条件
 
-* $t \in enabled(\mu)$
+* $t \in \mathrm{enabled}(\mu)$
 * $(\mu - \cdot t) \cap t\cdot = \varnothing$
 * $Eft(t) \leqslant c(t) + \delta$
-* $\forall t^{\prime} \in enabled(\mu), c(t^{\prime}) + \delta \leqslant Lft(t^{\prime})$
+* $\forall t^{\prime} \in \mathrm{enabled}(\mu), c(t^{\prime}) + \delta \leqslant Lft(t^{\prime})$
 
-在从 $s$ 以延迟 $\delta$ fire $t$ 之后，新的状态 $s^{\prime} =(\mu^{\prime}, c^{\prime})$ 为
+在从 $s$ 以延迟 $\delta$ fire $t$ 之后，新的状态 $s^{\prime} =(\mu^{\prime}, c^{\prime})$ 为
 
 * $\mu^{\prime} = (\mu - \cdot t) \cup t \cdot$
-* 对于任意 $t^{\prime} \in enabled(\mu^{\prime})$ ，如果 $t^{\prime} \neq t \land t^{\prime} \in enabled(\mu)$ 则 $c^{\prime}(t^{\prime}) = c(t^{\prime}) + \delta$ ，否则 $c^{\prime}(t^{\prime}) = 0$
+* 对于任意 $t^{\prime} \in \mathrm{enabled}(\mu^{\prime})$ ，如果 $t^{\prime} \neq t \land t^{\prime} \in \mathrm{enabled}(\mu)$ 则 $c^{\prime}(t^{\prime}) = c(t^{\prime}) + \delta$ ，否则 $c^{\prime}(t^{\prime}) = 0$
 
 则 time PN 的 run 是一个 state，transition，delay 的序列
 
