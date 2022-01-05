@@ -212,7 +212,7 @@ $Q^{\prime}$ 中的元素 $(q, x)$ 满足 $q \in Q$ 且 $x$ 是某个 $h(a)$ 的
 对于 $\delta^{\prime}$ ，其定义分为两种情况
 
 * buffer 为空，即 $\delta^{\prime}((q, \epsilon), a, X) = \{((q, h(a)), X)\}$ ，此处的 $a \neq \epsilon$ 。即当 buffer 为空，$P^{\prime}$ 读入下一个输入 $a$ 并将 $h(a)$ 放入 buffer
-* buffer 不为空，则若 $(p, \gamma) \in \delta(q, b, X), b \in T \text{ or } b = \epsilon $ ，则
+* buffer 不为空，则若 $(p, \gamma) \in \delta(q, b, X), b \in T \text{ or } b = \epsilon$ ，则
 
   $$
   ((p, x), \gamma) \in \delta^{\prime}((q, bx), \epsilon, X)
