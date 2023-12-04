@@ -3,6 +3,7 @@
 <head>
     <!-- so meta -->
     <meta charset="utf-8">
+    <meta name="google-site-verification" content="o-Am5uWIeYLRphbFS3dSUPE5n5eqn1qNYaMVtMhc0jk" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
@@ -14,7 +15,7 @@
 <meta property="og:description" content="协变与逆变 前言 程序语言类型系统中的协变（covariance）与逆变（contravariance）是支持子类型和泛型（即类型参数化）的程序语言中，类型构造器的一种性质。 举一个简单的例子，Java 中的 List 就是一个类型构造器。将 Integer 作为参数传入该构造器，即可得到一个具体的类型：List&lt;Integer&gt;。 本文的后续将使用如下类型关系：  基本类">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-10T12:43:51.000Z">
-<meta property="article:modified_time" content="2023-05-10T12:44:04.554Z">
+<meta property="article:modified_time" content="2023-05-26T09:09:09.272Z">
 <meta property="article:author" content="Zhengxuan Qian">
 <meta property="article:tag" content="Type System">
 <meta name="twitter:card" content="summary">
@@ -51,124 +52,7 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 5.2.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"] > svg a {
-  fill: blue;
-  stroke: blue;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -305,39 +189,39 @@ mjx-container[display="true"] + br {
 <p>下面将从几个实际的例子出发解释为什么会有这样的规则。</p>
 <h3 id="协变">协变</h3>
 <p>考虑一个如下定义的类型构造器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Producer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">produce</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Producer</span>&lt;T&gt; &#123;</span><br><span class="line">    T <span class="title function_">produce</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以及构造出的类型 <code>Producer&lt;Animal&gt;</code>。现在考虑该类型的子类型 <code>Producer&lt;T&gt;</code>，那么作为参数的类型 <code>T</code> 应当满足怎样的条件呢？</p>
 <p>考虑该类型定义的规约，类型 <code>Producer&lt;Animal&gt;</code> 的实例在调用 <code>produce</code> 方法时需要返回一个 <code>Animal</code> 类型的对象。如果将类型看作是操作的集合（i.e. <code>Animal</code> 类型所定义的成员方法），则显然，根据 LSP，作为子类型的 <code>Producer&lt;T&gt;</code> 的实例应当返回一个<em>至少</em>支持 <code>Animal</code> 类型所支持所有操作的新对象，才能满足 LSP。显然类型 <code>T</code> 只能是 <code>Animal</code> 或其子类型。</p>
 <p>上述结论同样可以简单地通过反证法得到。考虑 <code>T</code> 类型为 <code>Animal</code> 的父类型，如 <code>Object</code>。则在使用子类型 <code>Producer&lt;Object&gt;</code> 实例替换父类型 <code>Producer&lt;Animal&gt;</code> 时，调用方通过父类型的方法签名期望得到一个支持 <code>Animal</code> 类型所有操作的对象，但实际上子类型返回了一个仅支持 <code>Object</code> 所有操作的对象，如果 <code>Animal</code> 的操作集合是 <code>Object</code> 的严格超集（这在有子类型的系统中十分常见），则调用方在调用 <code>Animal</code> 类型独有操作时会产生运行时错误，这显然破坏了 LSP。</p>
 <h3 id="逆变">逆变</h3>
 <p>考虑一个如下定义的类型构造器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Consumer</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">consume</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Consumer</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">consume</span><span class="params">(T t)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>以及构造出的类型 <code>Consumer&lt;Animal&gt;</code>。现在考虑该类型的子类型 <code>Consumer&lt;T&gt;</code>。</p>
 <p>同样，我们考虑该类型构造器的方法 <code>consume</code> （在分析时均只考虑被调用方内部的规约，而不考虑调用方如何处理参数或结果）。根据类型签名，该实例期望传入对象支持 <code>Animal</code> 所支持的所有操作，则子类型 <code>Consumer&lt;T&gt;</code> 如果想替换父类型实例，也只能假定传入对象<em>至多</em>支持 <code>Animal</code> 类型所支持的所有操作。此时 <code>T</code> 为 <code>Animal</code> 类的父类型。</p>
 <p>使用反证法的思路同上节。</p>
 <h3 id="不变">不变</h3>
 <p>考虑一个最简单的容器作为类型构造器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Container</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">put</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Container</span>&lt;T&gt; &#123;</span><br><span class="line">    T <span class="title function_">get</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(T t)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>则构造出的类型不应当具有子类型关系。考虑 <code>Container&lt;Animal&gt;</code> 与 <code>Container&lt;Cat&gt;</code>，无论前者是后者的子类型还是后者是前者的子类型，都会在 <code>get</code> 或 <code>put</code> 方法上破坏 LSP。因此一个支持读写的容器类型构造器都应当实现为不变的。</p>
 <h3 id="多参数">多参数</h3>
 <p>上述情况均只考虑一个类型参数的情况，在类型参数有多个时，不难得出类型构造器对生产的类型应当是协变的，对消费的类型应当是逆变的。考虑如下多参数类型构造器</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Action</span> &lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">R <span class="title">action</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Action</span> &lt;T, R&gt; &#123;</span><br><span class="line">    R <span class="title function_">action</span><span class="params">(T t)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>考虑构造得到的类型 <code>Action&lt;Animal, Animal&gt;</code>，则只有 <code>Action&lt;Object, Cat&gt;</code> 或 <code>Action&lt;Object, Dog&gt;</code> 是其子类型（不考虑 <code>T, R</code> 为 <code>Animal</code> 的情况）</p>
 <h2 id="java-中的逆变与协变">Java 中的逆变与协变</h2>
 <p>在 Java 中，类型构造器默认都是不变的。如果想实现协变与逆变的效果，可以在声明构造类型时使用相应的通配符。考虑如下定义：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Action</span> &lt;<span class="title">T</span>, <span class="title">R</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">R <span class="title">action</span><span class="params">(T t)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Action</span> &lt;T, R&gt; &#123;</span><br><span class="line">    R <span class="title function_">action</span><span class="params">(T t)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>则如果想构造一个实际类型 <code>Action&lt;Animal, Animal&gt;</code>，应当将变量类型声明为</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Action&lt;? <span class="keyword">super</span> Animal, ? extends Animal&gt; a;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Action&lt;? <span class="built_in">super</span> Animal, ? <span class="keyword">extends</span> <span class="title class_">Animal</span>&gt; a;</span><br></pre></td></tr></table></figure>
 <p>此时变量 <code>a</code> 可以引用对应的子类型且只要编译通过，便不会破环 LSP。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="keyword">new</span> Action&lt;Object, Cat&gt;()&#123; <span class="comment">// valid</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cat <span class="title">action</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="keyword">new</span> <span class="title class_">Action</span>&lt;Object, Cat&gt;()&#123; <span class="comment">// valid</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Cat <span class="title function_">action</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>即 Java 中无法将类型构造器定义为协变或逆变，程序员只能根据类型构造器对类型参数对象的使用方式（生产或消费），在构造具体类型时<em>正确地</em>使用通配符实现协变和逆变的语义。事实上，Java 编译器会避免错误的通配符使用。在使用 <code>&lt;? extends T&gt;</code> 形式的通配符时，所有以类型参数为参数类型的方法，传入实参时只能传入 null。而当使用 <code>&lt;? super T&gt;</code> 时，所有以类型参数为返回值类型的方法所返回的对象只能使用 <code>Object</code> 接收。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? extends Integer&gt; a = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">a.add(<span class="number">1</span>);               <span class="comment">// compile error</span></span><br><span class="line">a.add(<span class="keyword">null</span>);            <span class="comment">// valid</span></span><br><span class="line">Integer i = a.get(<span class="number">0</span>);   <span class="comment">// valid</span></span><br><span class="line"></span><br><span class="line">List&lt;? <span class="keyword">super</span> Integer&gt; b = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">b.add(<span class="number">1</span>);               <span class="comment">// valid</span></span><br><span class="line">i = b.get(<span class="number">0</span>);           <span class="comment">// compile error</span></span><br><span class="line">Object o = b.get(<span class="number">0</span>);    <span class="comment">// valid</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Integer</span>&gt; a = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">a.add(<span class="number">1</span>);               <span class="comment">// compile error</span></span><br><span class="line">a.add(<span class="literal">null</span>);            <span class="comment">// valid</span></span><br><span class="line"><span class="type">Integer</span> <span class="variable">i</span> <span class="operator">=</span> a.get(<span class="number">0</span>);   <span class="comment">// valid</span></span><br><span class="line"></span><br><span class="line">List&lt;? <span class="built_in">super</span> Integer&gt; b = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">b.add(<span class="number">1</span>);               <span class="comment">// valid</span></span><br><span class="line">i = b.get(<span class="number">0</span>);           <span class="comment">// compile error</span></span><br><span class="line"><span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> b.get(<span class="number">0</span>);    <span class="comment">// valid</span></span><br></pre></td></tr></table></figure>
 <p>Java 在实现数组时将其实现为了协变，这也带来了潜在的风险</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal[] a;</span><br><span class="line">a = <span class="keyword">new</span> Cat[<span class="number">10</span>]; <span class="comment">// valid</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="keyword">new</span> Animal(); <span class="comment">// ArrayStoreException</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Animal[] a;</span><br><span class="line">a = <span class="keyword">new</span> <span class="title class_">Cat</span>[<span class="number">10</span>]; <span class="comment">// valid</span></span><br><span class="line">a[<span class="number">0</span>] = <span class="keyword">new</span> <span class="title class_">Animal</span>(); <span class="comment">// ArrayStoreException</span></span><br></pre></td></tr></table></figure>
 <p>上述代码会通过编译，然后在运行时抛出异常。</p>
 <h2 id="c-中的协变与逆变">C# 中的协变与逆变</h2>
 <p>C# 中通过 <code>in</code> 和 <code>out</code> 关键词，可以定义类型构造器相对于类型参数的协变或逆变。在不使用关键词时，类型构造器默认是不变的。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">delegate</span> T <span class="title">Producer</span>&lt;<span class="keyword">out</span> <span class="title">T</span>&gt;(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">delegate</span> T <span class="title">Producer</span>&lt;<span class="keyword">out</span> <span class="title">T</span>&gt;()</span>;</span><br></pre></td></tr></table></figure>
 <p>则如下代码是合法的</p>
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Producer&lt;Animal&gt; producer = () =&gt; <span class="keyword">new</span> Cat();</span><br></pre></td></tr></table></figure>
 
